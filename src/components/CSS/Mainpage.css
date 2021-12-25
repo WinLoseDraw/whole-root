@@ -1,7 +1,7 @@
 .container{
     flex-grow: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
 }
 
@@ -16,10 +16,11 @@
 /* Nav bar */
 
 .mainPageNav{
-    height: 10%;
+    min-height: 100px;
     display: flex;
     align-items: center;
     padding: 0px 50px;
+    margin-bottom: 15px;
 
     box-shadow: 0px 2px 8px 2px rgba(128, 128, 128, 0.5);
 }
@@ -56,12 +57,22 @@
 .main-btn{
     width: 32%;
     height: 97%;
+    min-height: 500px;
     border: none;
     border-radius: 8px;
     box-shadow: 0px 2px 8px 2px rgba(128, 128, 128, 0.5);
 
     color: white;
     font-size: 40px;
+}
+
+.main-btn-text{
+    font-size: 25px;
+    width: 80%;
+    height: 60%;
+    margin: auto;
+    overflow: hidden;
+    transition: height 300ms;
 }
 
 #classroom{
@@ -98,12 +109,31 @@
 
 #library:hover{
     background-color: rgb(255, 172, 19);
-    transition: background-color 300ms;
+    transition: background-color 200ms;
 }
 
 #library:not(:hover){
     background-color: rgb(251, 138, 0);
-    transition: background-color 300ms;
+    transition: background-color 200m;
+}
+
+/* Btn transition */
+.text-expand-enter{
+    height: 0px;
+}
+
+.text-expand-active{
+    height: 60%;
+    transform: height 200ms;
+}
+
+.text-expand-done{
+    height: 60%;
+}
+
+.text-expand-exit-active{
+    height: 0;
+    transform: height 200ms;
 }
 
 /* Form */

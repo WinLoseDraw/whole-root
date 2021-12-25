@@ -16,6 +16,7 @@ const Mainpage = ({events}) => {
     // Hooks
     const [IsLoggedIn, setIsLoggedIn] = useState(false)
     const [IsOnMainPage, setIsOnMainPage] = useState(true)
+    const [IsBtnTextShowing, setIsBtnTextShowing] = useState({class: false, dashboard: false, library: false})
 
     const [OnLogin, setOnLogin] = useState(false)
     const [OnSignup, setOnSignup] = useState(false)
@@ -50,7 +51,10 @@ const Mainpage = ({events}) => {
             
             <div className="container">
                 
-                <button className="main-btn" id="classroom" onClick={() => IsLoggedIn?navigate("/Class"):0}>
+                <button className="main-btn" id="classroom" 
+                    onClick={() => IsLoggedIn?navigate("/Class"):0} 
+                    onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, class: true})}
+                    onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, class: false})}>
                     <CSSTransition
                         in={IsOnMainPage}
                         timeout={500}
@@ -60,8 +64,22 @@ const Mainpage = ({events}) => {
                         <ClassroomBtnIcon />
 
                     </CSSTransition>
+                    
+                    <CSSTransition
+                        in={IsBtnTextShowing.class}
+                        timeout={300}
+                        classNames="text-expand"
+                        unmountOnExit>
+                            
+                        <div className="main-btn-text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus enim omnis iusto corrupti veritatis eum fuga rem ea accusantium, quibusdam dignissimos eveniet laudantium officia sunt similique quia quaerat vel alias.
+                        </div>
+
+                    </CSSTransition>
                 </button>
-                <button className="main-btn" id="dashboard">
+                <button className="main-btn" id="dashboard"
+                    onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: true})}
+                    onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: false})}>
                     <CSSTransition
                         in={IsOnMainPage}
                         timeout={500}
@@ -71,8 +89,23 @@ const Mainpage = ({events}) => {
                         <DashboardBtnIcon />
 
                     </CSSTransition>
+
+                    <CSSTransition
+                        in={IsBtnTextShowing.dashboard}
+                        timeout={300}
+                        classNames="text-expand"
+                        unmountOnExit>
+                            
+                        <div className="main-btn-text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus enim omnis iusto corrupti veritatis eum fuga rem ea accusantium, quibusdam dignissimos eveniet laudantium officia sunt similique quia quaerat vel alias.
+                        </div>
+
+                    </CSSTransition>
+
                 </button>
-                <button className="main-btn" id="library">
+                <button className="main-btn" id="library"
+                    onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, library: true})}
+                    onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, library: false})}>
                     <CSSTransition
                         in={IsOnMainPage}
                         timeout={500}
@@ -82,6 +115,19 @@ const Mainpage = ({events}) => {
                         <LibraryBtnIcon />
 
                     </CSSTransition>
+
+                    <CSSTransition
+                        in={IsBtnTextShowing.library}
+                        timeout={300}
+                        classNames="text-expand"
+                        unmountOnExit>
+                            
+                        <div className="main-btn-text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus enim omnis iusto corrupti veritatis eum fuga rem ea accusantium, quibusdam dignissimos eveniet laudantium officia sunt similique quia quaerat vel alias.
+                        </div>
+
+                    </CSSTransition>
+
                 </button>
 
                 <CSSTransition
