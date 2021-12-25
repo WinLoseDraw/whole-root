@@ -1,0 +1,119 @@
+.container{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.mainpage {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+  }
+
+/* Nav bar */
+
+.mainPageNav{
+    height: 10%;
+    display: flex;
+    align-items: center;
+    padding: 0px 50px;
+
+    box-shadow: 0px 2px 8px 2px rgba(128, 128, 128, 0.5);
+}
+
+.title{
+    display: block;
+    flex-grow: 1;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.navButtonLogin{
+
+    background-color: black;
+    color: white;
+    border: solid 2px black;
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 10px 30px;
+    margin: 0px 10px;
+}
+
+.navButtonSignup{
+
+    border: solid 2px black;
+    background-color: rgb(233, 233, 233);
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 10px 30px;
+    margin: 0px 10px;
+}
+
+/* Buttons */
+.main-btn{
+    width: 32%;
+    height: 97%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px 2px rgba(128, 128, 128, 0.5);
+
+    color: white;
+    font-size: 40px;
+}
+
+#classroom{
+    background-color: rgb(0, 119, 22);
+}
+
+#classroom:hover{
+    background-color: rgb(0, 172, 31);
+    transition: background-color 300ms;
+}
+
+#classroom:not(:hover){
+    background-color: rgb(0, 119, 22);
+    transition: background-color 300ms;
+}
+
+#dashboard{
+    background-color: rgb(0, 92, 231);
+}
+
+#dashboard:hover{
+    background-color: rgb(50, 156, 255);
+    transition: background-color 300ms;
+}
+
+#dashboard:not(:hover){
+    background-color: rgb(0, 92, 231);
+    transition: background-color 300ms;
+}
+
+#library{
+    background-color: rgb(251, 138, 0);
+}
+
+#library:hover{
+    background-color: rgb(255, 172, 19);
+    transition: background-color 300ms;
+}
+
+#library:not(:hover){
+    background-color: rgb(251, 138, 0);
+    transition: background-color 300ms;
+}
+
+/* Form */
+.form-filter{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
