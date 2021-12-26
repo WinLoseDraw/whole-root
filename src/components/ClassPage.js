@@ -1,13 +1,49 @@
 import React, { useState } from 'react'
+import { CSSTransition } from 'react-transition-group'
+
+
 
 import "./CSS/ClassPage.css"
 
 const ClassPage = () => {
 
     // Hooks
-    const [CurrentTab, setCurrentTab] = useState(0)
+    const [CurrentTab, setCurrentTab] = useState(-1)
 
-    let rooms = [{name: "Maths"}, {name: "Science"}, {name: "English"}, {name: "Hindi"}, {name: "Social Science"}]
+    return (
+        <div className="classContainer">
+            <nav className="classNav">
+                <CSSTransition 
+                    in={CurrentTab===0}
+                    classNames="navTabTransition"
+                    timeout={200}>
+
+                    <div className="navTab" onClick={() => setCurrentTab(0)}>
+                        Classes
+                    </div>
+
+                </CSSTransition>
+
+                <CSSTransition
+                    in={CurrentTab===1}
+                    classNames="navTabTransition"
+                    timeout={200}>
+
+                    <div className="navTab" onClick={() => setCurrentTab(1)}>
+                        Time Table
+                    </div>
+
+                </CSSTransition>
+            </nav>
+
+            <ClassesTab />
+        </div>
+    )
+}
+
+const ClassesTab = () => {
+
+    let rooms = [{name: "Maths"}, {name: "Science"}, {name: "English"}, {name: "Hindi"}, {name: "Social Science"}, {name: "Social Science"}, {name: "Social Science"}]
 
     let gridItems = []
 
@@ -15,21 +51,9 @@ const ClassPage = () => {
         gridItems.push(<ClassCard name={item.name} />)
     })
 
-    return (
-        <div className="classContainer">
-            <nav className="classNav">
-                <div className="navTab">
-                    Classes
-                </div>
-                <div className="navTab">
-                    Time Table
-                </div>
-            </nav>
-            <div className="cardContainer">
+    return(<div className="cardContainer">
                 {gridItems}
-            </div>
-        </div>
-    )
+            </div>)
 }
 
 const ClassCard = ({name}) => {

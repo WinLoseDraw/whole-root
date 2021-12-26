@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Mainpage from "./components/Mainpage";
 import ClassPage from "./components/ClassPage";
+import ClassroomPage from "./components/ClassroomPage";
 
 // Events
 
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Mainpage events={events}/>}/>
           <Route path="/Class" element={<ClassPage />}/>
+          <Route path="/Classroom" element={<ClassroomPage />}/>
         </Routes>
       </Router>
     </div>

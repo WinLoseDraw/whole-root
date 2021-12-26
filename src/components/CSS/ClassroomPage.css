@@ -1,0 +1,61 @@
+:root{
+    --toolBarHeight: 150px;
+    --toolBarColor: rgb(53, 129,82);
+}
+
+.ToolPadBackground{
+    width: 65%;
+    height: var(--toolBarHeight);
+    background-color: var(--toolBarColor);
+    border-radius: 20px;
+    box-shadow: rgba(68, 68, 68, 0.5) 2px 2px 8px 2px;
+    font-size: var(--toolBarHeight);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.colorPalleteContainer{
+    height: calc(var(--toolBarHeight) * .8);
+    width: calc(var(--toolBarHeight) * 1.2);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.colorPallete{
+    height: calc(var(--toolBarHeight) * 0.3);
+    width: calc(var(--toolBarHeight) * 0.3);
+    border-radius: calc(var(--toolBarHeight) * 0.15);
+
+    box-shadow: rgba(24, 24, 24, 0.5) 0px 0px 6px 1px inset;
+
+    margin: auto;
+}
+
+#black{
+    background-color: rgb(43, 43, 43);
+}
+
+#green{
+    background-color: lime;
+}
+
+#blue{
+    background-color: blue;
+}
+
+#white{
+    background-color: white;
+}
+
+#yellow{
+    background-color: yellow;
+}
+
+#red{
+    background-color: red;
+}
+
+.icon{
+    flex-basis: 1;
+}
