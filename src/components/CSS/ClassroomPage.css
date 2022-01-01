@@ -1,10 +1,32 @@
 :root{
-    --toolBarHeight: 150px;
+    --toolBarHeight: 80px;
+    --sidePadWidth: 80px;
+    --rightPadWidth: 80px;
+    --toolBarHidePercentage: 65%;
+    --sideBarHidePercentage: -65%;
+    --rightBarHidePercentage: 65%;
     --toolBarColor: rgb(53, 129,82);
 }
 
+.containerClassroomPage{
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Footer */
+.containerToolPad{
+
+    position: absolute;
+    width: 100%;
+    top: calc(100vh - var(--toolBarHeight));
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Tool Pad */
 .ToolPadBackground{
-    width: 65%;
+    width: 55%;
     height: var(--toolBarHeight);
     background-color: var(--toolBarColor);
     border-radius: 20px;
@@ -15,6 +37,16 @@
     justify-content: space-evenly;
 }
 
+.ToolPadBackground:not(:hover){
+    transform: translate(0, var(--toolBarHidePercentage));
+    transition: transform 300ms;
+}
+
+.ToolPadBackground:hover{
+    transform: translate(0, 0);
+    transition: transform 300ms;
+}
+
 .colorPalleteContainer{
     height: calc(var(--toolBarHeight) * .8);
     width: calc(var(--toolBarHeight) * 1.2);
@@ -23,9 +55,10 @@
 }
 
 .colorPallete{
-    height: calc(var(--toolBarHeight) * 0.3);
-    width: calc(var(--toolBarHeight) * 0.3);
-    border-radius: calc(var(--toolBarHeight) * 0.15);
+    height: calc(var(--toolBarHeight) * 0.35);
+    width: calc(var(--toolBarHeight) * 0.35);
+    border: 1px solid var(--toolBarColor);
+    border-radius: calc(var(--toolBarHeight) * 0.175);
 
     box-shadow: rgba(24, 24, 24, 0.5) 0px 0px 6px 1px inset;
 
@@ -59,3 +92,85 @@
 .icon{
     flex-basis: 1;
 }
+
+/* Transition */
+.border-enter{
+    border: none;
+}
+
+.border-enter-active{
+    border: 1px solid white;
+    transition: border 300ms; 
+}
+
+.border-enter-done{
+    border: 1px solid white;
+}
+
+.containerSidePad{
+    position: absolute;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Side Pad */
+.sidePadBackground{
+    width: var(--sidePadWidth);
+    height: 50%;
+    background-color: var(--toolBarColor);
+    border-radius: 20px;
+    box-shadow: rgba(68, 68, 68, 0.5) 2px 2px 8px 2px;
+    font-size: var(--sidePadWidth);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.sidePadBackground:not(:hover){
+    transform: translate(var(--sideBarHidePercentage), 0);
+    transition: transform 300ms;
+}
+
+.sidePadBackground:hover{
+    transform: translate(0, 0);
+    transition: transform 300ms;
+}
+
+.containerRightPad{
+    position: absolute;
+    left: calc(100% - var(--rightPadWidth));
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rightPadBackground{
+    width: var(--rightPadWidth);
+    height: 25%;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 20px 0px 0px 20px;
+    box-shadow: rgba(68, 68, 68, 0.5) 2px 2px 8px 2px;
+    border: 2px solid white;
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: var(--rightPadWidth);
+}
+
+.rightPadBackground:not(:hover){
+    transform: translate(var(--rightBarHidePercentage), 0);
+    transition: transform 300ms;
+}
+
+.rightPadBackground:hover{
+    transform: translate(0, 0);
+    transition: transform 300ms;
+}
+
+/* Right pad */
