@@ -4,8 +4,10 @@ import LoginAndSignupForm from "./LoginAndSignupForm"
 import { useState } from "react";
 
 import ClassroomBtnIcon from "../iconComponents/ClassroomBtnIcon";
-import DashboardBtnIcon from "../iconComponents/DashboardBtnIcon";
+import ExamIcon from "../iconComponents/ExamIcon";
 import LibraryBtnIcon from "../iconComponents/LibraryBtnIcon";
+import WholerootLogoIcon from "../iconComponents/WholerootLogoIcon";
+import WholerootTextIcon from "../iconComponents/WholerootTextIcon";
 
 import { useNavigate } from "react-router-dom";
 
@@ -40,7 +42,8 @@ const Mainpage = ({events}) => {
             <nav className="mainPageNav">
                 
                 <div className="title">
-                    Whole Root   
+                    <WholerootLogoIcon width={70}/> 
+                    <WholerootTextIcon width={150}/>  
                 </div> 
 
                 <div className="buttonHolder">
@@ -86,7 +89,7 @@ const Mainpage = ({events}) => {
                         classNames="fade"
                         unmountOnExit>
 
-                        <DashboardBtnIcon />
+                        <ExamIcon />
 
                     </CSSTransition>
 
