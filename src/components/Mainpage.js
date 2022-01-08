@@ -18,15 +18,19 @@ const Mainpage = ({events}) => {
     // Hooks
     const [IsLoggedIn, setIsLoggedIn] = useState(false)
     const [IsOnMainPage, setIsOnMainPage] = useState(true)
+    const [IsOnSubscription, setIsOnSubscription] = useState(false)
     const [IsBtnTextShowing, setIsBtnTextShowing] = useState({class: false, dashboard: false, library: false})
 
     const [OnLogin, setOnLogin] = useState(false)
     const [OnSignup, setOnSignup] = useState(false)
 
+    const [Plan, setPlan] = useState("none")
+
     const enterMainPage = () => {
         setIsOnMainPage(true)
         setOnLogin(false)
         setOnSignup(false)
+        setIsOnSubscription(false)
     }
 
     const login = () => {
@@ -34,6 +38,20 @@ const Mainpage = ({events}) => {
         enterMainPage()
     }
 
+    const openSubscription = () => {
+
+        console.log("open")
+        enterMainPage()
+        setIsOnSubscription(true)
+    }
+
+    const openSignup = (plan) => {
+        setOnSignup(true)
+        setIsOnMainPage(false)
+        setOnLogin(false)
+        setPlan(plan)
+        console.log(OnLogin)
+    }
 
 
     return (
@@ -41,6 +59,8 @@ const Mainpage = ({events}) => {
 
             <nav className="mainPageNav">
                 
+                <div></div>
+
                 <div className="title">
                     <WholerootLogoIcon width={70}/> 
                     <WholerootTextIcon width={150}/>  
@@ -48,11 +68,59 @@ const Mainpage = ({events}) => {
 
                 <div className="buttonHolder">
                     <button className="navButtonLogin" onClick={() => {setOnLogin(true); setIsOnMainPage(false); setOnSignup(false);}}>LOGIN</button>
-                    <button className="navButtonSignup" onClick={() => {setOnSignup(true); setIsOnMainPage(false); setOnLogin(false)}}>SIGNUP</button>
+                    <button className="navButtonSignup" onClick={() => {setIsOnSubscription(true)}}>SIGNUP</button>
                 </div>
             </nav>
             
+            
+
             <div className="container">
+
+            {IsOnSubscription ? 
+            <>
+            <button 
+                className="subscriptionFormButton"
+                onClick={() => openSignup("free")}>
+                <h1>FREE</h1>
+                {!OnSignup && <>
+                <p className="description"> RECOMMENDED FOR SMALL SCALE EDUCATORS.<br/>(TUTORS, FREELANCERS)</p>
+                <ul>
+                    <li>The best way to conduct a class</li>
+                    <li>Interactive classroom with videoconfrencing and realtime 'onboard' student teacher interaction</li>
+                    <li>Hastle free</li>
+                    <li>Free</li>
+                </ul>
+                </>}
+            </button>
+            <button 
+                className="subscriptionFormButton"
+                onClick={() => openSignup("subscription")}>
+                    
+                    <h1>SUBSCRIPTION</h1>
+                    {!OnSignup && <><p className="description"> RECOMMENDED FOR DEFINITE TERM PROGRAMS.<br/>(COURSES, CAMPS, WORKSHOPS)</p>
+                    <ul>
+                        <li>Setup your own library</li>
+                        <li>Manage students</li>
+                        <li>Register multiple educators and provide multiple course tabs</li>
+                        <li>Pay monthly</li>
+                    </ul></>}
+            </button>
+            <button 
+                className="subscriptionFormButton"
+                onClick={() => openSignup("License")}>
+                <h1>LICENSE</h1>
+                {!OnSignup && <>
+                <p className="description"> RECOMMENDED FOR INSTITUTIONS.(K-12 SCHOOLS, COLLEGES, UNIVERSITIES)</p>
+                <ul>
+                    <li>All features unlocked with a single purchase for the whole institution with highlights:</li>
+                    <li>Testing sections with advanced malpractice counter measures and flexibility of mode conduct</li>
+                    <li>Management of students and educators by registered institution</li>
+                    <li>Advanced resources(student schedules, class recordings, drive integration)</li>
+                    <li>Renewal every 5 years</li>
+                </ul></>}
+            </button>
+        </>
+            :<>
                 
                 <button className="main-btn" id="classroom" 
                     onClick={() => IsLoggedIn?navigate("/Class"):0} 
@@ -75,7 +143,7 @@ const Mainpage = ({events}) => {
                         unmountOnExit>
                             
                         <div className="main-btn-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus enim omnis iusto corrupti veritatis eum fuga rem ea accusantium, quibusdam dignissimos eveniet laudantium officia sunt similique quia quaerat vel alias.
+                            Innovative realtime interactive interface with video conferencing and collaborative onboard; with functionality for attendees to annotate for best interaction and collaboration.
                         </div>
 
                     </CSSTransition>
@@ -100,7 +168,7 @@ const Mainpage = ({events}) => {
                         unmountOnExit>
                             
                         <div className="main-btn-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus enim omnis iusto corrupti veritatis eum fuga rem ea accusantium, quibusdam dignissimos eveniet laudantium officia sunt similique quia quaerat vel alias.
+                            Exclusive Testing sub platform with flexible testing methods, invigilation and malpractice correctives.
                         </div>
 
                     </CSSTransition>
@@ -126,13 +194,17 @@ const Mainpage = ({events}) => {
                         unmountOnExit>
                             
                         <div className="main-btn-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus enim omnis iusto corrupti veritatis eum fuga rem ea accusantium, quibusdam dignissimos eveniet laudantium officia sunt similique quia quaerat vel alias.
+                            Customisable library resources, ranging for video libraries to documented resources that can be setup by the institution.
                         </div>
 
                     </CSSTransition>
 
                 </button>
+                </>
+                }
 
+            </div>
+              
                 <CSSTransition
                     in={!IsOnMainPage}
                     timeout={500}
@@ -142,9 +214,15 @@ const Mainpage = ({events}) => {
                     <div className="form-filter">
                         <LoginAndSignupForm 
                             login={login}
+                            signup={openSubscription}
+
+                            
                             enterMainPage={enterMainPage}
                             onLogin={{get: OnLogin, set: setOnLogin}}
                             onSignup={{get:OnSignup, set: setOnSignup}}
+                            
+                            plan={Plan}
+                            
                             events={{
                                 checkLogin: events.checkLogin,
                                 getSignupDetails: events.getSignupDetails
@@ -153,9 +231,9 @@ const Mainpage = ({events}) => {
 
                 </CSSTransition>
 
-            </div>
         </div>
     )
 }
+
 
 export default Mainpage

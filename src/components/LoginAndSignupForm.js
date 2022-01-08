@@ -3,11 +3,11 @@ import "./CSS/LoginAndSignupForm.css"
 import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
-const LoginAndSignupForm = ({ login, enterMainPage, events, onLogin, onSignup }) => {
+const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogin, onSignup }) => {
 
     // Hooks
     const [LoginCredentials, setLoginCredentials] = useState({email: "", password: ""})
-    const [SignUpDetails, setSignUpDetails] = useState({name: "", email: "", password: "", confPassword: ""})
+    const [SignUpDetails, setSignUpDetails] = useState({university: "", email: "", password: "", confPassword: ""})
 
     // Events
     const onLoginSubmit = e => { 
@@ -25,16 +25,13 @@ const LoginAndSignupForm = ({ login, enterMainPage, events, onLogin, onSignup })
 
         e.preventDefault()
 
-        if (SignUpDetails.name === "" || SignUpDetails.password === "" || SignUpDetails.email === "" || SignUpDetails.confPassword === ""){
+        if (SignUpDetails.password != SignUpDetails.confPassword || SignUpDetails.confPassword == "") {
+            setSignUpDetails({...SignUpDetails, password: "", confPassword: ""})
             return
         }
-        
 
-        if (SignUpDetails.password === SignUpDetails.confPassword){
-
-            if (events.getSignupDetails(SignUpDetails)){
-                onSignup.set(false)
-            }
+        if(events.getSignupDetails({plan: plan, university: SignUpDetails.university, email: SignUpDetails.email, password: SignUpDetails.password})){
+            login()
         }
     }
 
@@ -77,18 +74,18 @@ const LoginAndSignupForm = ({ login, enterMainPage, events, onLogin, onSignup })
 
                         <label>SIGN UP</label>
 
-                        <input type="text" placeholder="Name" 
-                            value={SignUpDetails.name}
-                            onChange={e => setSignUpDetails({...SignUpDetails, name: e.target.value})}/>
+                        <input type="text" placeholder="University" 
+                            value={SignUpDetails.university}
+                            onChange={e => setSignUpDetails({...SignUpDetails, university: e.target.value})}/>
 
                         <input type="email" placeholder="Email" 
                             value={SignUpDetails.email}
                             onChange={e => setSignUpDetails({...SignUpDetails, email: e.target.value})}/>
-
+                        
                         <input type="password" placeholder="Password" 
                             value={SignUpDetails.password}
                             onChange={e => setSignUpDetails({...SignUpDetails, password: e.target.value})}/>
-
+                        
                         <input type="password" placeholder="Confirm Password" 
                             value={SignUpDetails.confPassword}
                             onChange={e => setSignUpDetails({...SignUpDetails, confPassword: e.target.value})}/>
