@@ -26,6 +26,7 @@ const Mainpage = ({events}) => {
 
     const [Plan, setPlan] = useState("none")
 
+    
     const enterMainPage = () => {
         setIsOnMainPage(true)
         setOnLogin(false)
@@ -36,6 +37,7 @@ const Mainpage = ({events}) => {
     const login = () => {
         setIsLoggedIn(true)
         enterMainPage()
+        navigate("/University")
     }
 
     const openSubscription = () => {

@@ -1,0 +1,67 @@
+
+.UniversityPageContainer{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.UniversityPageContainer button{
+
+    width: 32%;
+    height: 97%;
+
+    min-height: 500px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px 2px rgba(128, 128, 128, 0.5);
+
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.green{
+    background-color: rgb(0, 119, 22);
+}
+
+.green:hover{
+    background-color: rgb(0, 172, 31);
+    transition: background-color 300ms;
+}
+
+.green:not(:hover){
+    background-color: rgb(0, 119, 22);
+    transition: background-color 300ms;
+}
+
+.blue{
+    background-color: rgb(0, 92, 231);
+}
+
+.blue:hover{
+    background-color: rgb(50, 156, 255);
+    transition: background-color 300ms;
+}
+
+.blue:not(:hover){
+    background-color: rgb(0, 92, 231);
+    transition: background-color 300ms;
+}
+
+.orange{
+    background-color: rgb(251, 138, 0);
+}
+
+.orange:hover{
+    background-color: rgb(255, 172, 19);
+    transition: background-color 200ms;
+}
+
+.orange:not(:hover){
+    background-color: rgb(251, 138, 0);
+    transition: background-color 200m;
+}

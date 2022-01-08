@@ -25,7 +25,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
 
         e.preventDefault()
 
-        if (SignUpDetails.password != SignUpDetails.confPassword || SignUpDetails.confPassword == "") {
+        if (SignUpDetails.password !== SignUpDetails.confPassword || SignUpDetails.confPassword === "") {
             setSignUpDetails({...SignUpDetails, password: "", confPassword: ""})
             return
         }
