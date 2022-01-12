@@ -31,7 +31,7 @@ const Mainpage = ({events}) => {
         setIsOnMainPage(true)
         setOnLogin(false)
         setOnSignup(false)
-        setIsOnSubscription(false)
+
     }
 
     const login = () => {
@@ -61,7 +61,9 @@ const Mainpage = ({events}) => {
 
             <nav className="mainPageNav">
                 
-                <div></div>
+                {IsOnSubscription? <div style={{display: "flex", alignItems: "center", justifyContent: "flex-start"}}>
+                    <button className="navButtonLogin" onClick={() => setIsOnSubscription(false)}>Back</button>
+                    </div>: <div></div>}
 
                 <div className="title">
                     <WholerootLogoIcon width={70}/> 
@@ -72,9 +74,7 @@ const Mainpage = ({events}) => {
                     <button className="navButtonLogin" onClick={() => {setOnLogin(true); setIsOnMainPage(false); setOnSignup(false);}}>LOGIN</button>
                     <button className="navButtonSignup" onClick={() => {setIsOnSubscription(true)}}>SIGNUP</button>
                 </div>
-            </nav>
-            
-            
+            </nav>  
 
             <div className="container">
 
@@ -84,7 +84,7 @@ const Mainpage = ({events}) => {
                 className="subscriptionFormButton"
                 onClick={() => openSignup("free")}>
                 <h1>FREE</h1>
-                {!OnSignup && <>
+                {(!OnSignup && !OnLogin)&& <>
                 <p className="description"> RECOMMENDED FOR SMALL SCALE EDUCATORS.<br/>(TUTORS, FREELANCERS)</p>
                 <ul>
                     <li>The best way to conduct a class</li>
@@ -99,7 +99,7 @@ const Mainpage = ({events}) => {
                 onClick={() => openSignup("subscription")}>
                     
                     <h1>SUBSCRIPTION</h1>
-                    {!OnSignup && <><p className="description"> RECOMMENDED FOR DEFINITE TERM PROGRAMS.<br/>(COURSES, CAMPS, WORKSHOPS)</p>
+                    {(!OnSignup && !OnLogin)&& <><p className="description"> RECOMMENDED FOR DEFINITE TERM PROGRAMS.<br/>(COURSES, CAMPS, WORKSHOPS)</p>
                     <ul>
                         <li>Setup your own library</li>
                         <li>Manage students</li>
@@ -111,7 +111,7 @@ const Mainpage = ({events}) => {
                 className="subscriptionFormButton"
                 onClick={() => openSignup("License")}>
                 <h1>LICENSE</h1>
-                {!OnSignup && <>
+                {(!OnSignup && !OnLogin)&& <>
                 <p className="description"> RECOMMENDED FOR INSTITUTIONS.(K-12 SCHOOLS, COLLEGES, UNIVERSITIES)</p>
                 <ul>
                     <li>All features unlocked with a single purchase for the whole institution with highlights:</li>
@@ -150,32 +150,6 @@ const Mainpage = ({events}) => {
 
                     </CSSTransition>
                 </button>
-                <button className="main-btn" id="dashboard"
-                    onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: true})}
-                    onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: false})}>
-                    <CSSTransition
-                        in={IsOnMainPage}
-                        timeout={500}
-                        classNames="fade"
-                        unmountOnExit>
-
-                        <ExamIcon />
-
-                    </CSSTransition>
-
-                    <CSSTransition
-                        in={IsBtnTextShowing.dashboard}
-                        timeout={300}
-                        classNames="text-expand"
-                        unmountOnExit>
-                            
-                        <div className="main-btn-text">
-                            Exclusive Testing sub platform with flexible testing methods, invigilation and malpractice correctives.
-                        </div>
-
-                    </CSSTransition>
-
-                </button>
                 <button className="main-btn" id="library"
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, library: true})}
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, library: false})}>
@@ -197,6 +171,32 @@ const Mainpage = ({events}) => {
                             
                         <div className="main-btn-text">
                             Customisable library resources, ranging for video libraries to documented resources that can be setup by the institution.
+                        </div>
+
+                    </CSSTransition>
+
+                </button>
+                <button className="main-btn" id="dashboard"
+                    onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: true})}
+                    onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: false})}>
+                    <CSSTransition
+                        in={IsOnMainPage}
+                        timeout={500}
+                        classNames="fade"
+                        unmountOnExit>
+
+                        <ExamIcon />
+
+                    </CSSTransition>
+
+                    <CSSTransition
+                        in={IsBtnTextShowing.dashboard}
+                        timeout={300}
+                        classNames="text-expand"
+                        unmountOnExit>
+                            
+                        <div className="main-btn-text">
+                            Exclusive Testing sub platform with flexible testing methods, invigilation and malpractice correctives.
                         </div>
 
                     </CSSTransition>

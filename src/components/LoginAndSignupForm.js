@@ -42,7 +42,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                 timeout={500}
                 classNames="fade"
                 unmountOnExit
-                onExited={() => {onSignup.set(true); setLoginCredentials({email: "", password: ""})}}>
+                onExited={() => {setLoginCredentials({email: "", password: ""})}}>
 
                 <form action="login" className="main-form" onSubmit={onLoginSubmit}>
                     
@@ -68,7 +68,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                 timeout={500}
                 classNames="fade"
                 unmountOnExit
-                onExited={() => {onLogin.set(true); setSignUpDetails({name: "", email: "", password: "", confPassword: ""})}}>
+                onExited={() => {setSignUpDetails({name: "", email: "", password: "", confPassword: ""})}}>
 
                     <form action="signup" className="main-form" onSubmit={onSignupSubmit}>
 
