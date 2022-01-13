@@ -81,7 +81,7 @@ const Mainpage = ({events}) => {
             {IsOnSubscription ? 
             <>
             <button 
-                className="subscriptionFormButton"
+                className="subscriptionFormButton blue"
                 onClick={() => openSignup("free")}>
                 <h1>FREE</h1>
                 {(!OnSignup && !OnLogin)&& <>
@@ -95,7 +95,7 @@ const Mainpage = ({events}) => {
                 </>}
             </button>
             <button 
-                className="subscriptionFormButton"
+                className="subscriptionFormButton orange"
                 onClick={() => openSignup("subscription")}>
                     
                     <h1>SUBSCRIPTION</h1>
@@ -108,7 +108,7 @@ const Mainpage = ({events}) => {
                     </ul></>}
             </button>
             <button 
-                className="subscriptionFormButton"
+                className="subscriptionFormButton green"
                 onClick={() => openSignup("License")}>
                 <h1>LICENSE</h1>
                 {(!OnSignup && !OnLogin)&& <>
@@ -124,7 +124,7 @@ const Mainpage = ({events}) => {
         </>
             :<>
                 
-                <button className="main-btn" id="classroom" 
+                <button className="main-btn green"
                     onClick={() => IsLoggedIn?navigate("/Class"):0} 
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, class: true})}
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, class: false})}>
@@ -150,7 +150,7 @@ const Mainpage = ({events}) => {
 
                     </CSSTransition>
                 </button>
-                <button className="main-btn" id="library"
+                <button className="main-btn orange"
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, library: true})}
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, library: false})}>
                     <CSSTransition
@@ -176,7 +176,7 @@ const Mainpage = ({events}) => {
                     </CSSTransition>
 
                 </button>
-                <button className="main-btn" id="dashboard"
+                <button className="main-btn blue"
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: true})}
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: false})}>
                     <CSSTransition

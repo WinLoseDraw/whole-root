@@ -94,44 +94,44 @@
     transition: height 300ms;
 }
 
-#classroom{
+.green{
     background-color: rgb(0, 119, 22);
 }
 
-#classroom:hover{
+.green:hover{
     background-color: rgb(0, 172, 31);
     transition: background-color 300ms;
 }
 
-#classroom:not(:hover){
+.green:not(:hover){
     background-color: rgb(0, 119, 22);
     transition: background-color 300ms;
 }
 
-#dashboard{
+.blue{
     background-color: rgb(0, 92, 231);
 }
 
-#dashboard:hover{
+.blue:hover{
     background-color: rgb(50, 156, 255);
     transition: background-color 300ms;
 }
 
-#dashboard:not(:hover){
+.blue:not(:hover){
     background-color: rgb(0, 92, 231);
     transition: background-color 300ms;
 }
 
-#library{
+.orange{
     background-color: rgb(251, 138, 0);
 }
 
-#library:hover{
+.orange:hover{
     background-color: rgb(255, 172, 19);
     transition: background-color 200ms;
 }
 
-#library:not(:hover){
+.orange:not(:hover){
     background-color: rgb(251, 138, 0);
     transition: background-color 200m;
 }
@@ -178,22 +178,23 @@
     min-height: 500px;
     padding: 0px 35px;
     border: none;
-    color: gray;
+    color: white;
     box-shadow: 0px 2px 8px 2px rgba(128, 128, 128, 0.5);
     font-family: 'Noto Sans', sans-serif;
 }
 
+
 .subscriptionFormButton:hover{
     transform: scale(1.01);
-    transition: transform 200ms;
+    transition: transform 300ms;
 }
 
 .subscriptionFormButton h1{
     width: 100%;
     padding-top: 20px;
     padding-bottom: 20px;
-    border-top: 1px solid gray;
-    border-bottom: 3px solid gray;
+    border-top: 1px solid white;
+    border-bottom: 3px solid white;
 }
 
 .subscriptionFormButton ul{
