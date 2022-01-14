@@ -125,7 +125,6 @@ const Mainpage = ({events}) => {
             :<>
                 
                 <button className="main-btn green"
-                    onClick={() => IsLoggedIn?navigate("/Class"):0} 
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, class: true})}
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, class: false})}>
                     <CSSTransition
@@ -133,8 +132,11 @@ const Mainpage = ({events}) => {
                         timeout={500}
                         classNames="fade"
                         unmountOnExit>
-
-                        <ClassroomBtnIcon />
+                        
+                        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                            <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>LEARN</span>
+                            <ClassroomBtnIcon />
+                        </div>
 
                     </CSSTransition>
                     
@@ -158,8 +160,11 @@ const Mainpage = ({events}) => {
                         timeout={500}
                         classNames="fade"
                         unmountOnExit>
-
-                        <LibraryBtnIcon />
+                        
+                        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                            <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>STUDY</span>
+                            <LibraryBtnIcon />
+                        </div>
 
                     </CSSTransition>
 
@@ -184,9 +189,10 @@ const Mainpage = ({events}) => {
                         timeout={500}
                         classNames="fade"
                         unmountOnExit>
-
-                        <ExamIcon />
-
+                        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                            <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>TEST</span>
+                            <ExamIcon />
+                        </div>
                     </CSSTransition>
 
                     <CSSTransition

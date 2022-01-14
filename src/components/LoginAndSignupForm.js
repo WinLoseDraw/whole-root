@@ -2,21 +2,33 @@ import "./CSS/LoginAndSignupForm.css"
 
 import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import { useNavigate } from "react-router-dom";
 
 const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogin, onSignup }) => {
+
+    let navigate = useNavigate()
 
     // Hooks
     const [LoginCredentials, setLoginCredentials] = useState({email: "", password: ""})
     const [SignUpDetails, setSignUpDetails] = useState({university: "", email: "", password: "", confPassword: ""})
 
     // Events
-    const onLoginSubmit = e => { 
+    const onLoginSubmit = (e, type) => { 
         
         e.preventDefault()
 
-        if (events.checkLogin(LoginCredentials)){
-            login()
+        switch (type) {
+            case 'student':
+                navigate('/student')
+                break;
+        
+            default:
+                break;
         }
+
+        // if (events.checkLogin(LoginCredentials)){
+        //     login()
+        // }
         
         setLoginCredentials({email: "", password: ""})
     }  
@@ -47,16 +59,19 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                 <form action="login" className="main-form" onSubmit={onLoginSubmit}>
                     
                     <label>LOG IN</label>
-
+{/* 
                     <input type="email" placeholder="Email"
                         value={LoginCredentials.email}
                         onChange={ e => setLoginCredentials({...LoginCredentials, email: e.target.value})} />
 
                     <input type="password" placeholder="Password" 
                         value={LoginCredentials.password}
-                        onChange={ e => setLoginCredentials({...LoginCredentials, password: e.target.value})} />
+                        onChange={ e => setLoginCredentials({...LoginCredentials, password: e.target.value})} /> */}
 
-                    <button type="submit">LOG IN</button>
+                    <button type="button" onClick={e => onLoginSubmit(e, 'student')}>STUDENT</button>
+
+                    <button type="button" onClick={e => onLoginSubmit(e, 'teacher')}>TEACHER</button>
+                    <button type="button" onClick={e => onLoginSubmit(e, 'institute')}>INSTITUTE</button>
 
                     <button type="button" onClick={() => enterMainPage()}>Back</button>
                 </form>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-
+import { useNavigate } from "react-router-dom";
 
 import "./CSS/ClassPage.css"
 
@@ -12,7 +12,7 @@ const ClassPage = () => {
 
     return (
         <div className="classContainer">
-            <nav className="classNav">
+            {/* <nav className="classNav">
                 <CSSTransition 
                     in={CurrentTab===0}
                     classNames="navTabTransition"
@@ -34,7 +34,7 @@ const ClassPage = () => {
                     </div>
 
                 </CSSTransition>
-            </nav>
+            </nav> */}
 
             <ClassesTab />
         </div>
@@ -56,10 +56,12 @@ const ClassesTab = () => {
             </div>)
 }
 
-const ClassCard = ({name}) => {
-
+const ClassCard = ({name}) => {  
+     
+    let navigate = useNavigate()
+     
     return (
-        <div className="classCard">
+        <div className="classCard" onClick={() => {navigate('/Classroom')}}>
             {name}
         </div>
     )

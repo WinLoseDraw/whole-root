@@ -19,9 +19,11 @@ import './CSS/ClassroomPage.css'
 import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+
 const ClassroomPage = () => {
     return (
         <div className="containerClassroomPage">
+            
             <div className="containerSidePad">
                 <SidePad />
             </div>

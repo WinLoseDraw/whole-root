@@ -4,6 +4,10 @@ import ClassPage from "./components/ClassPage";
 import ClassroomPage from "./components/ClassroomPage";
 import UniversityPage from "./components/UniversityPage";
 import RegisterPage from "./components/RegisterPage";
+import StudentPage from "./components/StudentPage";
+import TeacherPage from "./components/TeacherPage";
+import TeacherResource from "./components/TeacherResource"
+import TeacherTest from "./components/TeacherTest";
 
 // Events
 
@@ -33,10 +37,14 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Mainpage events={events}/>}/>
-          <Route path="/Class" element={<ClassPage />}/>
+          <Route path="/Student/Class" element={<ClassPage />}/>
           <Route path="/Classroom" element={<ClassroomPage />}/>
           <Route path="/University" element={<UniversityPage />}/>
           <Route path="/Register" element={<RegisterPage />}/>
+          <Route path="/Student" element={<StudentPage />} />
+          <Route path="/Teacher" element={<TeacherPage />} />
+          <Route path="/Teacher/Resource" element={<TeacherResource />} />
+          <Route path="/Teacher/Test" element={<TeacherTest />} />
         </Routes>
       </Router>
     </div>
