@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
 import { useNavigate } from "react-router-dom";
@@ -43,16 +43,19 @@ const ClassPage = () => {
 
 const ClassesTab = () => {
 
-    let rooms = [{name: "Maths"}, {name: "Science"}, {name: "English"}, {name: "Hindi"}, {name: "Social Science"}, {name: "Social Science"}, {name: "Social Science"}]
+    const [Rooms, setRooms] = useState([{name: "Maths"}, {name: "Science"}, {name: "English"}, {name: "Hindi"}, {name: "French"}, {name: "Social Science"}, {name: "Fine Arts"}])
+    const [GridItems, setGridItems] = useState([])
 
-    let gridItems = []
-
-    rooms.forEach((item, index) => {
-        gridItems.push(<ClassCard name={item.name} />)
-    })
+    useEffect(() => {
+        let t = []
+        Rooms.forEach((item, index) => {
+            t.push(<ClassCard name={item.name} />)
+        })
+        setGridItems(t)
+    }, [Rooms])
 
     return(<div className="cardContainer">
-                {gridItems}
+                {GridItems}
             </div>)
 }
 
@@ -61,7 +64,7 @@ const ClassCard = ({name}) => {
     let navigate = useNavigate()
      
     return (
-        <div className="classCard" onClick={() => {navigate('/Classroom')}}>
+        <div className="classCard" onClick={() => {navigate('/Student/Classroom')}}>
             {name}
         </div>
     )

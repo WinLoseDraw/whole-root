@@ -7,6 +7,7 @@ import ExamIcon from "../iconComponents/ExamIcon";
 import WholerootLogoIcon from "../iconComponents/WholerootLogoIcon";
 import WholerootTextIcon from "../iconComponents/WholerootTextIcon";
 import { useNavigate } from "react-router-dom";
+
 const TeacherPage = () => {
     let navigate = useNavigate()
 
@@ -31,12 +32,12 @@ const TeacherPage = () => {
 
             <div className="container">
                 <button className="main-btn green"
-                    onClick={() => navigate('/classroom')}
+                    onClick={() => navigate('/Teacher/classroom')}
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, class: true})}
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, class: false})}>
                 
                     <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-                        <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>LEARN</span>
+                        <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>TEACH</span>
                         <ClassroomBtnIcon />
                     </div>
     
@@ -58,7 +59,7 @@ const TeacherPage = () => {
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, library: false})}>
                   
                     <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-                        <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>STUDY</span>
+                        <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>RESOURCES</span>
                         <LibraryBtnIcon />
                     </div>
 

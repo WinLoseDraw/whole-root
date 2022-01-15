@@ -8,6 +8,14 @@ import StudentPage from "./components/StudentPage";
 import TeacherPage from "./components/TeacherPage";
 import TeacherResource from "./components/TeacherResource"
 import TeacherTest from "./components/TeacherTest";
+import TestPage from "./components/BoardFIles/TestPage";
+import { Canvas } from "./components/BoardFIles/Canvas";
+import StudentTest from "./components/StudentTest";
+import StudentResource from "./components/StudentResource";
+import ResourceAccessPage from "./components/ResourceAccessPage";
+import io from 'socket.io-client'
+
+const socket = io.connect("http://localhost:3001")
 
 // Events
 
@@ -38,10 +46,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Mainpage events={events}/>}/>
           <Route path="/Student/Class" element={<ClassPage />}/>
-          <Route path="/Classroom" element={<ClassroomPage />}/>
-          <Route path="/University" element={<UniversityPage />}/>
+          <Route path="Student/Classroom" element={<ClassroomPage user="student" room="classroom1" socket={socket}/>}/>
+          <Route path="Teacher/Classroom" element={<ClassroomPage user="teacher" room="classroom1" socket={socket}/>}/>
+          <Route path="/institute" element={<UniversityPage />}/>
           <Route path="/Register" element={<RegisterPage />}/>
           <Route path="/Student" element={<StudentPage />} />
+          <Route path="/Student/Test" element={<StudentTest />} />
+          <Route path="/Student/Resource" element={<StudentResource />} />
+          <Route path="/Student/Resource/Access" element={<ResourceAccessPage />} />
           <Route path="/Teacher" element={<TeacherPage />} />
           <Route path="/Teacher/Resource" element={<TeacherResource />} />
           <Route path="/Teacher/Test" element={<TeacherTest />} />

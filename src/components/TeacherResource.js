@@ -5,6 +5,7 @@ const TeacherResource = () => {
         <div>
             <button>Upload resource</button>
             UNDER DEVELOPMENT
+            <img src={process.env.PUBLIC_URL + '/logo512.png'} alt="" />
         </div>
     )
 }

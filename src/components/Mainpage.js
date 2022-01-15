@@ -83,8 +83,8 @@ const Mainpage = ({events}) => {
             <button 
                 className="subscriptionFormButton blue"
                 onClick={() => openSignup("free")}>
-                <h1>FREE</h1>
                 {(!OnSignup && !OnLogin)&& <>
+                <h1>FREE</h1>
                 <p className="description"> RECOMMENDED FOR SMALL SCALE EDUCATORS.<br/>(TUTORS, FREELANCERS)</p>
                 <ul>
                     <li>The best way to conduct a class</li>
@@ -98,8 +98,9 @@ const Mainpage = ({events}) => {
                 className="subscriptionFormButton orange"
                 onClick={() => openSignup("subscription")}>
                     
+                    {(!OnSignup && !OnLogin)&& <>
                     <h1>SUBSCRIPTION</h1>
-                    {(!OnSignup && !OnLogin)&& <><p className="description"> RECOMMENDED FOR DEFINITE TERM PROGRAMS.<br/>(COURSES, CAMPS, WORKSHOPS)</p>
+                    <p className="description"> RECOMMENDED FOR DEFINITE TERM PROGRAMS.<br/>(COURSES, CAMPS, WORKSHOPS)</p>
                     <ul>
                         <li>Setup your own library</li>
                         <li>Manage students</li>
@@ -110,8 +111,9 @@ const Mainpage = ({events}) => {
             <button 
                 className="subscriptionFormButton green"
                 onClick={() => openSignup("License")}>
-                <h1>LICENSE</h1>
+                
                 {(!OnSignup && !OnLogin)&& <>
+                <h1>LICENSE</h1>
                 <p className="description"> RECOMMENDED FOR INSTITUTIONS.(K-12 SCHOOLS, COLLEGES, UNIVERSITIES)</p>
                 <ul>
                     <li>All features unlocked with a single purchase for the whole institution with highlights:</li>
@@ -136,6 +138,7 @@ const Mainpage = ({events}) => {
                         <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                             <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>LEARN</span>
                             <ClassroomBtnIcon />
+                            <span style={{fontSize:'0.5em', fontWeight: 'bold', marginTop:'20px'}}>Hover to learn more...</span>
                         </div>
 
                     </CSSTransition>
@@ -164,6 +167,7 @@ const Mainpage = ({events}) => {
                         <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                             <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>STUDY</span>
                             <LibraryBtnIcon />
+                            <span style={{fontSize:'0.5em', fontWeight: 'bold', marginTop:'20px'}}>Hover to learn more...</span>
                         </div>
 
                     </CSSTransition>
@@ -192,6 +196,7 @@ const Mainpage = ({events}) => {
                         <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                             <span style={{fontSize:'0.5em', fontWeight: 'bold', marginBottom:'20px'}}>TEST</span>
                             <ExamIcon />
+                            <span style={{fontSize:'0.5em', fontWeight: 'bold', marginTop:'30px'}}>Hover to learn more...</span>
                         </div>
                     </CSSTransition>
 

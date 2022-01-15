@@ -55,6 +55,7 @@ const StudentPage = () => {
                     </CSSTransition>
                 </button>
                 <button className="main-btn orange"
+                    onClick={() => navigate('/student/resource')}
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, library: true})}
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, library: false})}>
                   
@@ -77,6 +78,7 @@ const StudentPage = () => {
 
                 </button>
                 <button className="main-btn blue"
+                    onClick={() => navigate("/Student/Test")}
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: true})}
                     onMouseLeave={() => setIsBtnTextShowing({...IsBtnTextShowing, dashboard: false})}>
                     
