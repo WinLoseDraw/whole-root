@@ -111,7 +111,7 @@
 }
 
 .ToolPadBackground:not(:hover){
-    /* transform: translate(0, var(--toolBarHidePercentage)); */
+    transform: translate(0, var(--toolBarHidePercentage));
     transition: transform 300ms;
 }
 
@@ -203,7 +203,7 @@
 }
 
 .sidePadBackground:not(:hover){
-    /* transform: translate(var(--sideBarHidePercentage), 0); */
+    transform: translate(var(--sideBarHidePercentage), 0);
     transition: transform 300ms;
 }
 
@@ -239,7 +239,7 @@
 }
 
 .rightPadBackground:not(:hover){
-    /* transform: translate(var(--rightBarHidePercentage), 0); */
+    transform: translate(var(--rightBarHidePercentage), 0);
     transition: transform 300ms;
 }
 

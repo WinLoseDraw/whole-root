@@ -35,12 +35,13 @@ const InstituteStudentList = () => {
     )
 }
 
-const Row = ({sno, name, _class}) => {
+const Row = ({sno, name, _class, section}) => {
     return(
         <div style={{display: 'flex' , marginLeft: '20px', marginRight: '20px'}}>
-            <div style={{ width:'20%', border: '2px solid black', backgroundColor: 'white'}}>{sno}</div>
-            <div style={{ width:'40%', border: '2px solid black', backgroundColor: 'white'}}>{name}</div>
-            <div style={{ width:'40%', border: '2px solid black', backgroundColor: 'white'}}>{_class}</div>
+            <div style={{ width:'10%', border: '2px solid black', backgroundColor: 'white'}}>{sno}</div>
+            <div style={{ width:'30%', border: '2px solid black', backgroundColor: 'white'}}>{name}</div>
+            <div style={{ width:'30%', border: '2px solid black', backgroundColor: 'white'}}>{_class}</div>
+            <div style={{ width:'30%', border: '2px solid black', backgroundColor: 'white'}}>{section}</div>
         </div>
     )
 }
