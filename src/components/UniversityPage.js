@@ -9,10 +9,10 @@ const UniversityPage = () => {
 
     return (
         <div className="UniversityPageContainer">
-            <button className="green" onClick={() => {navigate("/Register")}}>
+            <button className="green" onClick={() => {navigate("/Institute/Register")}}>
                 REGISTER
             </button>
-            <button className="blue">
+            <button className="blue" onClick={() => {navigate("/institute/Members")}}>
                 MEMBERS
             </button>
             <button className="orange">

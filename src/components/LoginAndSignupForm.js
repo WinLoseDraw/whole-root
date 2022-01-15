@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { getInstitute, setInstitute } from "../App";
 
 const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogin, onSignup }) => {
 
@@ -38,6 +39,9 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                     alert("incorrect credentials")
                     return
                 }
+
+                setInstitute(LoginCredentials.email)
+                console.log(getInstitute())
 
                 switch (type) {
                     case 'student':
@@ -107,7 +111,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                     
                     <label>LOG IN</label>
 
-                    <input type="email" placeholder="Email"
+                    <input type="text" placeholder="Username"
                         value={LoginCredentials.email}
                         onChange={ e => setLoginCredentials({...LoginCredentials, email: e.target.value})} />
 

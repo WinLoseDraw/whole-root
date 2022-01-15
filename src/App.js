@@ -14,6 +14,9 @@ import StudentTest from "./components/StudentTest";
 import StudentResource from "./components/StudentResource";
 import ResourceAccessPage from "./components/ResourceAccessPage";
 import io from 'socket.io-client'
+import InstituteMembers from "./components/InstituteMembers";
+import InstituteTeacherList from "./components/InstituteTeacherList";
+import InstituteStudentList from "./components/InstituteStudentList";
 
 const socket = io.connect("http://localhost:3001")
 
@@ -39,7 +42,18 @@ const events = {
   getSignupDetails: getSignupDetails
 }
 
+let institute = null
+
+export function setInstitute(val){
+  institute = val
+}
+
+export function getInstitute(){
+  return institute
+}
+
 function App() {
+
   return (
     <div className="app">
       <Router>
@@ -49,7 +63,10 @@ function App() {
           <Route path="Student/Classroom" element={<ClassroomPage user="student" room="classroom1" socket={socket}/>}/>
           <Route path="Teacher/Classroom" element={<ClassroomPage user="teacher" room="classroom1" socket={socket}/>}/>
           <Route path="/institute" element={<UniversityPage />}/>
-          <Route path="/Register" element={<RegisterPage />}/>
+          <Route path="/institute/members" element={<InstituteMembers />}/>
+          <Route path="/institute/members/teachers" element={<InstituteTeacherList />}/>
+          <Route path="/institute/members/students" element={<InstituteStudentList />}/>
+          <Route path="/institute/Register" element={<RegisterPage />}/>
           <Route path="/Student" element={<StudentPage />} />
           <Route path="/Student/Test" element={<StudentTest />} />
           <Route path="/Student/Resource" element={<StudentResource />} />

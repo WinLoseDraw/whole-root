@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import './CSS/RegisterPage.css'
+import { getInstitute } from '../App'
 
 const RegisterPage = () => {
 
@@ -9,11 +11,43 @@ const RegisterPage = () => {
     const registerStudent = (e) => {
         e.preventDefault()
         console.log(StudentInfo)
+
+        axios
+            .post("https://test-serverrr.herokuapp.com/registerstudent", {
+                username: StudentInfo.name,
+                pass: StudentInfo.password,
+                inst_name: StudentInfo.rollno,
+                clas: StudentInfo.class,
+                section: StudentInfo.subject
+            })
+            .then((res) => {
+                console.log(res.data.msg)
+                alert("success")
+            })
+            .catch((err) => {
+                console.log(err)
+                alert("failed to register")
+            });
     }
 
     const registerTeacher = (e) => {
         e.preventDefault()
         console.log(TeacherInfo)
+
+        axios
+            .post("https://test-serverrr.herokuapp.com/registerteacher", {
+                username: TeacherInfo.name,
+                pass: TeacherInfo.password,
+                inst_name: getInstitute(),
+                clas: TeacherInfo.class,
+                subjects: TeacherInfo.subject
+            })
+            .then((res) => {
+                console.log(res.data.msg)
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     }
 
     return (
