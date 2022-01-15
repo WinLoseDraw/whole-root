@@ -20,6 +20,7 @@ const InstituteTeacherList = () => {
                     t.push(<Row sno={index} name={element[0]["value"]} subject={element[1]["value"]}/>)
                 });
                 setTableItems(t)
+                console.log(getInstitute())
             })
             .catch((err) => {
                 console.log(err)

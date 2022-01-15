@@ -16,7 +16,7 @@ const RegisterPage = () => {
             .post("https://test-serverrr.herokuapp.com/registerstudent", {
                 username: StudentInfo.name,
                 pass: StudentInfo.password,
-                inst_name: StudentInfo.rollno,
+                inst_name: getInstitute(),
                 clas: StudentInfo.class,
                 section: StudentInfo.subject
             })
@@ -44,9 +44,11 @@ const RegisterPage = () => {
             })
             .then((res) => {
                 console.log(res.data.msg)
+                alert("success")
             })
             .catch((err) => {
                 console.log(err)
+                alert("failed to register")
             });
     }
 
