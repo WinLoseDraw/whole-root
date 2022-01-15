@@ -78,9 +78,20 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
             return
         }
 
-        if(events.getSignupDetails({plan: plan, university: SignUpDetails.university, email: SignUpDetails.email, password: SignUpDetails.password})){
-            login()
-        }
+        axios
+        .post("https://test-serverrr.herokuapp.com/signup", {
+            inst_name: SignUpDetails.university,
+            email: SignUpDetails.email,
+            pass: SignUpDetails.password,
+            plan_opted: plan
+        })
+        .then((res) => {
+            alert("Successfully signed up")
+            navigate("/institute")
+        })
+        .catch((err) => {
+            console.log(err)
+        });
     }
 
     return (
