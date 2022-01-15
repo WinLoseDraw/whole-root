@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { getInstitute } from '../App'
 
 
 
@@ -10,7 +11,7 @@ const InstituteStudentList = () => {
     useEffect(() => {
         axios
             .post("https://test-serverrr.herokuapp.com/allstudents", {
-                inst_name: "QWE",
+                inst_name: getInstitute(),
             })
             .then((res) => {
                 console.log(res.data.rows)
