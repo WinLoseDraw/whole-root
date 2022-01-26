@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import Mainpage from "./components/Mainpage";
 import ClassPage from "./components/ClassPage";
 import ClassroomPage from "./components/ClassroomPage";
@@ -8,8 +8,6 @@ import StudentPage from "./components/StudentPage";
 import TeacherPage from "./components/TeacherPage";
 import TeacherResource from "./components/TeacherResource"
 import TeacherTest from "./components/TeacherTest";
-import TestPage from "./components/BoardFIles/TestPage";
-import { Canvas } from "./components/BoardFIles/Canvas";
 import StudentTest from "./components/StudentTest";
 import StudentResource from "./components/StudentResource";
 import ResourceAccessPage from "./components/ResourceAccessPage";
@@ -17,6 +15,7 @@ import io from 'socket.io-client'
 import InstituteMembers from "./components/InstituteMembers";
 import InstituteTeacherList from "./components/InstituteTeacherList";
 import InstituteStudentList from "./components/InstituteStudentList";
+import { useState } from "react";
 
 const socket = io.connect("http://localhost:3001")
 
@@ -42,38 +41,62 @@ const events = {
   getSignupDetails: getSignupDetails
 }
 
-let institute = null
+// export function setInstitute(val){
+//   setInstitute(val);
+// }
 
-export function setInstitute(val){
-  institute = val
-}
+// export function getInstitute(){
+//   return institute;
+// }
 
-export function getInstitute(){
-  return institute
-}
+// export function setIsLogin(val){
+//   setIsLogin(val)
+// }
+
+// export function getIsLogin(){
+//   return isLogin;
+// }
+
+// export function setLoginType(val){
+//   setLoginType(val)
+// }
+
+// export function getLoginType(){
+//   return loginType;
+// }
+
+// export function checkAccess(){
+//   if (!isLogin || loginType === 'none'){
+//     return true
+//   }
+// }
 
 function App() {
+
+  const [Auth, setAuth] = useState({login: false, institute: null, loginType: null, page: "/"});
 
   return (
     <div className="app">
       <Router>
         <Routes>
-          <Route path="/" element={<Mainpage events={events}/>}/>
-          <Route path="/Student/Class" element={<ClassPage />}/>
-          <Route path="Student/Classroom" element={<ClassroomPage user="student" room="classroom1" socket={socket}/>}/>
-          <Route path="Teacher/Classroom" element={<ClassroomPage user="teacher" room="classroom1" socket={socket}/>}/>
-          <Route path="/institute" element={<UniversityPage />}/>
-          <Route path="/institute/members" element={<InstituteMembers />}/>
-          <Route path="/institute/members/teachers" element={<InstituteTeacherList />}/>
-          <Route path="/institute/members/students" element={<InstituteStudentList />}/>
-          <Route path="/institute/Register" element={<RegisterPage />}/>
-          <Route path="/Student" element={<StudentPage />} />
-          <Route path="/Student/Test" element={<StudentTest />} />
-          <Route path="/Student/Resource" element={<StudentResource />} />
-          <Route path="/Student/Resource/Access" element={<ResourceAccessPage />} />
-          <Route path="/Teacher" element={<TeacherPage />} />
-          <Route path="/Teacher/Resource" element={<TeacherResource />} />
-          <Route path="/Teacher/Test" element={<TeacherTest />} />
+          <Route path="/" element={<Mainpage events={events} auth={{get: Auth, set: setAuth}}/>}/>
+ 
+          <Route path="/Student/Class" element={<ClassPage auth={{get: Auth, set: setAuth}}/>}/>
+          <Route path="Student/Classroom" element={<ClassroomPage user="student" room="classroom1" socket={socket} auth={{get: Auth, set: setAuth}}/>}/>
+          <Route path="Teacher/Classroom" element={<ClassroomPage user="teacher" room="classroom1" socket={socket} auth={{get: Auth, set: setAuth}}/>}/>
+          <Route path="/institute" element={<UniversityPage auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/institute/members" element={<InstituteMembers auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/institute/members/teachers" element={<InstituteTeacherList auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/institute/members/students" element={<InstituteStudentList auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/institute/Register" element={<RegisterPage auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/Student" element={<StudentPage auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Student/Test" element={<StudentTest auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Student/Resource" element={<StudentResource auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Student/Resource/Access" element={<ResourceAccessPage auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Teacher" element={<TeacherPage auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Teacher/Resource" element={<TeacherResource auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Teacher/Test" element={<TeacherTest auth={{get: Auth, set: setAuth}} />} />
+          
         </Routes>
       </Router>
     </div>

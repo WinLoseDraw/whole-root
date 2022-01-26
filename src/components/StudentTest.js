@@ -84,6 +84,12 @@ const StudentTest = () => {
   const [mouseOffset, setMouseOffset] = useState({x: 0, y: 0})
   const [VideoDrag, setVideoDrag] = useState(false)
 
+  const [Questions, setQuestions] = useState([{text: "Find velocity of charged particle"}, {text: "Find energy of earth"}])
+  const [QuestionComponents, setQuestionComponents] = useState([])
+  const [CurrentQuestionComponent, setCurrentQuestionComponent] = useState(null)
+
+  const [CurrentQuestionNumber, setCurrentQuestionNumber] = useState(1)
+
   // Refs
   const answerText = useRef(null)
   const submitBtn = useRef(null)
@@ -111,6 +117,20 @@ const StudentTest = () => {
     setPrevMousePos({x: e.clientX, y: e.clientY})
   }
 
+  useEffect(() => {
+    
+    let t = []
+    Questions.forEach((question, index) => {
+      t.push(<Question number={index+1} question={question.text}/>)
+    });
+    setQuestionComponents(t);
+
+  }, [Questions])
+
+  useEffect(() => {
+    setCurrentQuestionComponent(QuestionComponents[CurrentQuestionNumber - 1])
+  }, [QuestionComponents, CurrentQuestionNumber])
+
   return (
     <div className="main">
         <div id="video-conf" className="video-conference"
@@ -128,7 +148,18 @@ const StudentTest = () => {
           </div>
         </div>
         
-        <div className="vhalf question">
+        <h1>PHYSICS ASSESSMENT</h1>
+
+        <form className="assessment">
+          <div className="questionChangeBtnHolder">
+            <button type="button" onClick={()=>{if (CurrentQuestionNumber > 1) setCurrentQuestionNumber(CurrentQuestionNumber - 1)}}>&larr;</button>
+            <button type="button" onClick={()=>{if (CurrentQuestionNumber < QuestionComponents.length) setCurrentQuestionNumber(CurrentQuestionNumber + 1)}}>&rarr;</button>
+          </div>
+          {CurrentQuestionComponent}
+          <button type="submit" id="submitBtn">SUBMIT</button>
+        </form>
+
+        {/* <div className="vhalf question">
           <div className="paperHeading">Physics Internal Assessment</div>
 
           <div className="paperContent">
@@ -153,8 +184,23 @@ const StudentTest = () => {
         <div className="vhalf submission">
           <textarea placeholder="Answer Here!!" id="answerText" className="answerText" ref={answerText}></textarea>
           <button id="submitBtn" className="submitBtn" ref={submitBtn}>Submit</button>
-        </div>
+        </div> */}
       </div>
+  )
+}
+
+const Question = ({number, question}) => {
+  return(
+    <>
+    Q{number}.
+    <div className="question">
+      {question}
+    </div>
+    <div className="answer">
+      <label htmlFor="answerText">Answer</label>
+      <textarea name="answerText"  placeholder="Answer text here!!" rows="20" cols="110"></textarea>
+    </div>
+    </>
   )
 }
 

@@ -1,12 +1,16 @@
 
-.UniversityPageContainer{
+.mainContainer{
     width: 100vw;
     height: 100vh;
-
     display: flex;
+    flex-direction: column;
+}
 
-    justify-content: space-evenly;
+.UniversityPageContainer{
+    flex-grow: 1;
+    display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .UniversityPageContainer button{

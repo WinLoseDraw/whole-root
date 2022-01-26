@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { CSSTransition } from "react-transition-group"
 import ClassroomBtnIcon from "../iconComponents/ClassroomBtnIcon";
@@ -8,18 +8,31 @@ import WholerootLogoIcon from "../iconComponents/WholerootLogoIcon";
 import WholerootTextIcon from "../iconComponents/WholerootTextIcon";
 import { useNavigate } from "react-router-dom";
 
-const StudentPage = () => {
+const StudentPage = ({auth}) => {
 
     let navigate = useNavigate()
 
     const [IsBtnTextShowing, setIsBtnTextShowing] = useState({class: false, dashboard: false, library: false})
 
+    useEffect(() => {
+        if (!auth.get.login) {
+            navigate("/")
+        }
+
+        auth.set({...auth.get, page: "/student"})
+    }, [])
+
     return (
         <div className="mainpage">
 
             <nav className="mainPageNav">
-                
-                <div></div>
+
+                <div className="buttonHolder" style={{justifyContent:"flex-start"}}>
+                    
+                    <button className="navButtonLogin" onClick={()=>{auth.set({login: false, institute: null, loginType: null, page: "/"}); navigate("/")}}>
+                        LOG OUT 
+                    </button>    
+                </div>
 
                 <div className="title">
                     <WholerootLogoIcon width={70}/> 

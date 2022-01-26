@@ -1,7 +1,7 @@
 import { CSSTransition } from "react-transition-group"
 import "./CSS/Mainpage.css"
 import LoginAndSignupForm from "./LoginAndSignupForm"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ClassroomBtnIcon from "../iconComponents/ClassroomBtnIcon";
 import ExamIcon from "../iconComponents/ExamIcon";
@@ -10,8 +10,9 @@ import WholerootLogoIcon from "../iconComponents/WholerootLogoIcon";
 import WholerootTextIcon from "../iconComponents/WholerootTextIcon";
 
 import { useNavigate } from "react-router-dom";
+import { getIsLogin, getLoginType } from "../App";
 
-const Mainpage = ({events}) => {
+const Mainpage = ({events, auth}) => {
 
     let navigate = useNavigate()
 
@@ -23,14 +24,22 @@ const Mainpage = ({events}) => {
 
     const [OnLogin, setOnLogin] = useState(false)
     const [OnSignup, setOnSignup] = useState(false)
+    const [OnQuickJoin, setOnQuickJoin] = useState(false)
 
     const [Plan, setPlan] = useState("none")
 
+    useEffect(() => {
+        console.log(auth.get.login)
+        if (auth.get.login){
+            navigate(auth.get.page)
+        }
+    }, [])
     
     const enterMainPage = () => {
         setIsOnMainPage(true)
         setOnLogin(false)
         setOnSignup(false)
+        setOnQuickJoin(false)
 
     }
 
@@ -55,7 +64,6 @@ const Mainpage = ({events}) => {
         console.log(OnLogin)
     }
 
-
     return (
         <div className="mainpage">
 
@@ -63,7 +71,12 @@ const Mainpage = ({events}) => {
                 
                 {IsOnSubscription? <div style={{display: "flex", alignItems: "center", justifyContent: "flex-start"}}>
                     <button className="navButtonLogin" onClick={() => setIsOnSubscription(false)}>Back</button>
-                    </div>: <div></div>}
+                    </div>: 
+                        <div className="buttonHolder" style={{justifyContent:"flex-start"}}>   
+                            <button className="navButtonSignup" onClick={()=>{setOnQuickJoin(true); setOnLogin(false); setIsOnMainPage(false)}}>
+                                QUICK JOIN
+                            </button>    
+                        </div>}
 
                 <div className="title">
                     <WholerootLogoIcon width={70}/> 
@@ -228,11 +241,12 @@ const Mainpage = ({events}) => {
                         <LoginAndSignupForm 
                             login={login}
                             signup={openSubscription}
-
+                            auth={auth}
                             
                             enterMainPage={enterMainPage}
                             onLogin={{get: OnLogin, set: setOnLogin}}
                             onSignup={{get:OnSignup, set: setOnSignup}}
+                            onQuickJoin={{get: OnQuickJoin, set: setOnQuickJoin}}
                             
                             plan={Plan}
                             

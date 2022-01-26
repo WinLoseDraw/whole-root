@@ -1,28 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './CSS/RegisterPage.css'
-import { getInstitute } from '../App'
+import { useNavigate } from 'react-router'
 
-const RegisterPage = () => {
+const RegisterPage = ({auth}) => {
+
+    let navigate = useNavigate()
 
     const [StudentInfo, setStudentInfo] = useState({name: "", class: "", section: "", rollno: "", password: ""})
     const [TeacherInfo, setTeacherInfo] = useState({name: "", class: "", subject: "", password: ""})
+
+    useEffect(() => {
+        if (!auth.get.login) {
+            navigate("/")
+        }
+
+        auth.set({...auth.get, page: "/institute/register"})
+    }, [])
 
     const registerStudent = (e) => {
         e.preventDefault()
         console.log(StudentInfo)
 
+        for (let x in StudentInfo){
+            if (TeacherInfo[x] == ""){
+                alert("Fill all the details")
+                return
+            }
+        }
+
         axios
             .post("https://test-serverrr.herokuapp.com/registerstudent", {
                 username: StudentInfo.name,
                 pass: StudentInfo.password,
-                inst_name: getInstitute(),
+                inst_name: auth.get.institute,
                 clas: StudentInfo.class,
                 section: StudentInfo.subject
             })
             .then((res) => {
                 console.log(res.data.msg)
                 alert("success")
+                setStudentInfo({name: "", class: "", section: "", rollno: "", password: ""})
             })
             .catch((err) => {
                 console.log(err)
@@ -34,17 +52,25 @@ const RegisterPage = () => {
         e.preventDefault()
         console.log(TeacherInfo)
 
+        for (let x in TeacherInfo){
+            if (TeacherInfo[x] == ""){
+                alert("Fill all the details")
+                return
+            }
+        }
+
         axios
             .post("https://test-serverrr.herokuapp.com/registerteacher", {
                 username: TeacherInfo.name,
                 pass: TeacherInfo.password,
-                inst_name: getInstitute(),
+                inst_name: auth.get.institute,
                 clas: TeacherInfo.class,
                 subjects: TeacherInfo.subject
             })
             .then((res) => {
                 console.log(res.data.msg)
                 alert("success")
+                setTeacherInfo({name: "", class: "", subject: "", password: ""})
             })
             .catch((err) => {
                 console.log(err)

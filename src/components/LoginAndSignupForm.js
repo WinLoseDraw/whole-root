@@ -4,15 +4,15 @@ import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import { getInstitute, setInstitute } from "../App";
 
-const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogin, onSignup }) => {
+const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogin, onSignup, onQuickJoin, auth }) => {
 
     let navigate = useNavigate()
 
     // Hooks
     const [LoginCredentials, setLoginCredentials] = useState({email: "", password: ""})
     const [SignUpDetails, setSignUpDetails] = useState({university: "", email: "", password: "", confPassword: ""})
+    const [QuickJoinDetails, setQuickJoinDetails] = useState({code: "", password: "", name: ""})
 
     // Events
     const onLoginSubmit = (e, type) => { 
@@ -34,14 +34,14 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                 pass: LoginCredentials.password,
             })
             .then((res) => {
-                console.log(res.data.auth)
+                console.log(res)
                 if (res.data.auth === "False"){
                     alert("incorrect credentials")
                     return
                 }
 
-                setInstitute(LoginCredentials.email)
-                console.log(getInstitute())
+                console.log(auth)
+                auth.set({login: true, institute: LoginCredentials.email, loginType: type})
 
                 switch (type) {
                     case 'student':
@@ -59,12 +59,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                     default:
                         break;
                 }
-                
 
-                // if (events.checkLogin(LoginCredentials)){
-                //     login()
-                // }
-                
                 setLoginCredentials({email: "", password: ""})
             })
             .catch((err) => {
@@ -96,6 +91,12 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
         .catch((err) => {
             console.log(err)
         });
+    }
+
+    const onQuickJoinSubmit = e => {
+        e.preventDefault()
+
+        console.log(QuickJoinDetails)
     }
 
     return (
@@ -157,6 +158,36 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                             onChange={e => setSignUpDetails({...SignUpDetails, confPassword: e.target.value})}/>
 
                         <button type="submit">SIGN UP</button>
+
+                        <button type="button" onClick={() => enterMainPage()}>BACK</button>
+
+                    </form>
+            </CSSTransition>
+
+            <CSSTransition
+                in={onQuickJoin.get}
+                timeout={500}
+                classNames="fade"
+                unmountOnExit
+                onExited={() => {setQuickJoinDetails({code: "", password:"", name: ""})}}>
+
+                    <form action="signup" className="main-form" onSubmit={onQuickJoinSubmit}>
+
+                        <label>QUICK JOIN</label>
+
+                        <input type="text" placeholder="Name" 
+                            value={QuickJoinDetails.name}
+                            onChange={e => setQuickJoinDetails({...QuickJoinDetails, name: e.target.value})}/>
+
+                        <input type="text" placeholder="Code" 
+                            value={QuickJoinDetails.code}
+                            onChange={e => setQuickJoinDetails({...QuickJoinDetails, code: e.target.value})}/>
+                        
+                        <input type="password" placeholder="Password" 
+                            value={QuickJoinDetails.password}
+                            onChange={e => setQuickJoinDetails({...QuickJoinDetails, password: e.target.value})}/>
+                        
+                        <button type="submit">JOIN</button>
 
                         <button type="button" onClick={() => enterMainPage()}>BACK</button>
 
