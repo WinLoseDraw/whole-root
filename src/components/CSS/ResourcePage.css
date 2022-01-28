@@ -8,24 +8,17 @@
 
 .resourceCard{
     width: 28vw;
-    height: 80vh;
 
     margin: 55px auto;
-    padding-top: 30px;
 
     display: flex;
     flex-direction: column;
     text-align: center;
     color: black;
+    justify-content: center;
 
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 8px;
 
     font-size: 40px;
-}
-
-.resourceCard ol{
-    font-size: 0.5em;
-    text-align: left;
-    margin-left: 25px;
 }

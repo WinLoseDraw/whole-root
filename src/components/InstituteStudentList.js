@@ -9,6 +9,11 @@ const InstituteStudentList = ({auth}) => {
     let navigate = useNavigate()
 
     const [TableItems, setTableItems] = useState([])
+    const [TableData, setTableData] = useState([])
+
+    const onDelete = (name) => {
+        console.log(name)
+    }
 
     useEffect(() => {
         if (!auth.get.login) {
@@ -27,14 +32,17 @@ const InstituteStudentList = ({auth}) => {
                 console.log(res.data.rows)
 
                 let t = []
+                let s = []
                 res.data.rows.forEach((element, index) => {
                     if (index == res.data.rows.length - 1){
-                        t.push(<End sno={index} name={element[0]["value"]} _class={element[6]["value"]}/>)
+                        t.push(<End sno={index+1} name={element[0]["value"]} _class={element[6]["value"]} onDelete={onDelete}/>)
                     }else{
-                        t.push(<Row sno={index} name={element[0]["value"]} _class={element[6]["value"]}/>)
+                        t.push(<Row sno={index+1} name={element[0]["value"]} _class={element[6]["value"]} onDelete={onDelete}/>)
                     }
+                    s.push({name: element[0]["value"], class: element[6]["value"], uid: element[4]["value"]})
                 });
                 setTableItems(t)
+                setTableData(s)
             })
             .catch((err) => {
                 console.log(err)
@@ -51,22 +59,24 @@ const InstituteStudentList = ({auth}) => {
     )
 }
 
-const Row = ({sno, name, _class, section}) => {
+const Row = ({sno, name, _class, onDelete}) => {
     return(
         <div style={{display: 'flex'}}>
             <div style={{ width:'20%', border: '1px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
-            <div style={{ width:'40%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{name}</div>
-            <div style={{ width:'40%', border: '1px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{_class}</div>
+            <div style={{ width:'38%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{name}</div>
+            <div style={{ width:'38%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{_class}</div>
+            <div style={{ width:'4%', border: '1px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px', display:'flex', justifyContent:'center'}}><button onClick={(e)=>{onDelete(name)}}>X</button></div>
         </div>
     )
 }
 
-const End = ({sno, name, _class, section}) => {
+const End = ({sno, name, _class, onDelete}) => {
     return(
         <div style={{display: 'flex'}}>
             <div style={{ width:'20%', border: '1px solid black', borderLeft:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
-            <div style={{ width:'40%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{name}</div>
-            <div style={{ width:'40%', border: '1px solid black', borderRight:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{_class}</div>
+            <div style={{ width:'38%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{name}</div>
+            <div style={{ width:'38%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{_class}</div>
+            <div style={{ width:'4%', border: '1px solid black', borderRight:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px', display:'flex', justifyContent:'center'}}><button onClick={(e)=>{onDelete(name)}}>X</button></div>
         </div>
     )
 }
@@ -75,8 +85,9 @@ const Head = () => {
     return(
         <div style={{display: 'flex'}}>
             <div style={{ width:'20%', border: '1px solid black', borderTop:'2px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Sno</div>
-            <div style={{ width:'40%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Name</div>
-            <div style={{ width:'40%', border: '1px solid black', borderTop:'2px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Class</div>
+            <div style={{ width:'38%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Name</div>
+            <div style={{ width:'38%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Class</div>
+            <div style={{ width:'4%', border: '1px solid black', borderTop:'2px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px'}}></div>
         </div>
     )
 }

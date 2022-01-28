@@ -1,24 +1,16 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router'
-import './CSS/UniversityPage.css'
 import WholerootLogoIcon from "../iconComponents/WholerootLogoIcon";
 import WholerootTextIcon from "../iconComponents/WholerootTextIcon";
 
-const UniversityPage = ({auth}) => {
+import './CSS/InstituteFree.css'
+
+const InstituteFreePage = ({auth}) => {
 
     let navigate = useNavigate()
-    
-    useEffect(() => {
-        if (!auth.get.login) {
-            navigate("/")
-        }
-
-        auth.set({...auth.get, page: "/institute"})
-    }, [])
 
     return (
-        <div className="mainContainer">
-
+        <div className="freeContainer">
             <nav className="mainPageNav">
 
                 <div className="buttonHolder" style={{justifyContent:"flex-start"}}>
@@ -34,23 +26,22 @@ const UniversityPage = ({auth}) => {
                 </div> 
 
                 <div className="buttonHolder" style={{fontSize:"2.3rem"}}>
-                    INSTITUTE
+                    FREE
                 </div>
             </nav>  
 
-            <div className="UniversityPageContainer">
-                <button className="green" onClick={() => {navigate("/Institute/Register")}}>
-                    REGISTER
+            <div className="freeButtonsContainer">
+                <button className="freeBtn" style={{backgroundColor:'rgb(0, 119, 22)', color:'white'}}>
+                    CLASS
                 </button>
-                <button className="blue" onClick={() => {navigate("/institute/Members")}}>
-                    MEMBERS
-                </button>
-                <button className="orange" onClick={() => {navigate("/institute/resource")}}>
-                    RESOURCES
+                <button className="freeBtn" style={{backgroundColor:'rgb(0, 92, 231)', color:'white'}}>
+                    SETTINGS
                 </button>
             </div>
+            <span style={{margin:'auto'}}><h1>CODE: </h1></span>
         </div>
     )
 }
 
-export default UniversityPage
+
+export default InstituteFreePage

@@ -84,9 +84,9 @@ const ClassroomPage = ({user, room, socket}) => {
                 <RightPad user={user}/>
             </div>
 
-            <div className="boardContainer">
-                <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon}/>
-            </div>
+         
+            <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon}/>
+            
             {Chat && <ChatBox socket={socket} room={room} />}
         </div>
         </>

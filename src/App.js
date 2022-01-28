@@ -16,6 +16,10 @@ import InstituteMembers from "./components/InstituteMembers";
 import InstituteTeacherList from "./components/InstituteTeacherList";
 import InstituteStudentList from "./components/InstituteStudentList";
 import { useState } from "react";
+import InstituteResource from "./components/InstituteResource";
+import InstituteResourceAccessPage from "./components/InstituteResourceAccessPage";
+import InstituteFreePage from "./components/InstituteFreePage";
+import InstituteTeacherUpdatePage from "./components/InstituteTeacherUpdatePage";
 
 const socket = io.connect("http://localhost:3001")
 
@@ -41,39 +45,10 @@ const events = {
   getSignupDetails: getSignupDetails
 }
 
-// export function setInstitute(val){
-//   setInstitute(val);
-// }
-
-// export function getInstitute(){
-//   return institute;
-// }
-
-// export function setIsLogin(val){
-//   setIsLogin(val)
-// }
-
-// export function getIsLogin(){
-//   return isLogin;
-// }
-
-// export function setLoginType(val){
-//   setLoginType(val)
-// }
-
-// export function getLoginType(){
-//   return loginType;
-// }
-
-// export function checkAccess(){
-//   if (!isLogin || loginType === 'none'){
-//     return true
-//   }
-// }
 
 function App() {
 
-  const [Auth, setAuth] = useState({login: false, institute: null, loginType: null, page: "/"});
+  const [Auth, setAuth] = useState({login: false, institute: null, loginType: null, page: "/", plan: ""});
 
   return (
     <div className="app">
@@ -87,8 +62,11 @@ function App() {
           <Route path="/institute" element={<UniversityPage auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/members" element={<InstituteMembers auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/members/teachers" element={<InstituteTeacherList auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/institute/members/teachers/update" element={<InstituteTeacherUpdatePage auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/members/students" element={<InstituteStudentList auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/Register" element={<RegisterPage auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/institute/Resource" element={<InstituteResource auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/institute/Resource/access" element={<InstituteResourceAccessPage auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/Student" element={<StudentPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Test" element={<StudentTest auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Resource" element={<StudentResource auth={{get: Auth, set: setAuth}} />} />
@@ -96,6 +74,7 @@ function App() {
           <Route path="/Teacher" element={<TeacherPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Resource" element={<TeacherResource auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Test" element={<TeacherTest auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/free" element={<InstituteFreePage auth={{get: Auth, set: setAuth}} />} />
           
         </Routes>
       </Router>

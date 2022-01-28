@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router'
 
-import './CSS/ResourcePage.css'
-
-const StudentResource = () => {
-
+const InstituteResource = () => {
+    
     const [Resources, setResources] = useState([
         {name: "MATHS", resources: [{placeHolder: "Integeration", link: "/"}, {placeHolder: "Differentation", link: "/"}, {placeHolder: "ODE", link: "/"}]},
         {name: "PHYSICS", resources: [{placeHolder: "Kinematics", link: "/"}, {placeHolder: "Dynamics", link: "/"}, {placeHolder: "Rotation", link: "/"}]},
@@ -22,8 +20,6 @@ const StudentResource = () => {
         setGridItems(t)
     }, [Resources])
 
-    
-
     return (
         <div className="resourceContainer">
             {GridItems}
@@ -37,7 +33,7 @@ const ResourceCard = ({name, resources}) => {
 
 
     const resourceClick = () => {
-        navigate("/Student/Resource/Access", {state: {name: name, resources: resources}});
+        navigate("/institute/Resource/Access", {state: {name: name, resources: resources}});
     }
 
     return (
@@ -50,6 +46,4 @@ const ResourceCard = ({name, resources}) => {
     )
 }
 
-
-
-export default StudentResource
+export default InstituteResource

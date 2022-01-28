@@ -34,14 +34,18 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                 pass: LoginCredentials.password,
             })
             .then((res) => {
-                console.log(res)
+                console.log(res.data)
                 if (res.data.auth === "False"){
                     alert("incorrect credentials")
                     return
                 }
 
-                console.log(auth)
                 auth.set({login: true, institute: LoginCredentials.email, loginType: type})
+
+                if (res.data.plan === "free"){
+                    navigate('/free');
+                    return
+                }
 
                 switch (type) {
                     case 'student':
@@ -64,6 +68,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
             })
             .catch((err) => {
                 console.log(err)
+                alert(err)
             });
 
     }  

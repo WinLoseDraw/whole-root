@@ -74,6 +74,7 @@ export const CanvasProvider = ({ children }) => {
     setClickMousePos({x: e.clientX, y: e.clientY})
     const { offsetX, offsetY } = e.nativeEvent;
     contextRef.current.beginPath();
+    console.log("Sart")
 
     switch (Type) {
       case "eraser":
@@ -89,8 +90,6 @@ export const CanvasProvider = ({ children }) => {
 
     contextRef.current.moveTo(offsetX, offsetY);
     setIsDrawing(true);
-
-    drawImage()
   };
 
   const finishDrawing = () => {
