@@ -4,8 +4,6 @@
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-
-    background-color: rgb(235, 255, 233);
 }
 
 .freeButtonsContainer{
@@ -29,6 +27,7 @@
 
     background-color: white;
     border: none;
+    border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 8px;
 
     font-size: 40px;

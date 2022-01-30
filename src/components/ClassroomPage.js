@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 
 import 'tippy.js/dist/tippy.css'
 
-const ClassroomPage = ({user, room, socket}) => {
+const ClassroomPage = ({user}) => {
 
     // Hooks
     const [OnSelectDraw, setOnSelectDraw] = useState({
@@ -57,10 +57,6 @@ const ClassroomPage = ({user, room, socket}) => {
         }
     })
 
-    useEffect(() => {
-        socket.emit("join_room", room)
-    }, [room])
-
     return (
         <>
         <div className="containerClassroomPage">
@@ -87,33 +83,16 @@ const ClassroomPage = ({user, room, socket}) => {
          
             <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon}/>
             
-            {Chat && <ChatBox socket={socket} room={room} />}
+            {Chat && <ChatBox />}
         </div>
         </>
     )
 }
 
-const ChatBox = ({socket, room}) => {
+const ChatBox = ({}) => {
 
     const [CurrentMessage, setCurrentMessage] = useState("")
 
-    const sendMessage = async () => {
-        if (CurrentMessage === ""){return;}
-
-        const messageData = {
-            room: room,
-            message: CurrentMessage,
-            author: socket.id
-        }
-
-        await socket.emit("send_message", messageData)
-    }
-
-    useEffect(() => {
-        socket.on("recieve_message", (data => {
-            console.log(data)
-        }))
-    }, [socket])
 
     // Drag chat
     const [ChatPos, setChatPos] = useState({x: 100, y: 100})
@@ -149,7 +128,7 @@ const ChatBox = ({socket, room}) => {
             style={{left: ChatPos.x, top: ChatPos.y}}>
             <div className="inputContainer">
                 <input type="text" placeholder="Hey.." value={CurrentMessage} onChange={(e)=>setCurrentMessage(e.target.value)}/>
-                <button onClick={sendMessage}>&#9658;</button>
+                <button >&#9658;</button>
             </div>
         </div>
     )

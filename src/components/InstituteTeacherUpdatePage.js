@@ -1,12 +1,21 @@
 import React from 'react'
-import { useState } from 'react';
-import { useLocation } from 'react-router'
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router'
 
 const InstituteTeacherUpdatePage = ({auth}) => {
+
+    let navigate = useNavigate()
 
     const {state} = useLocation();
 
     const [TeacherInfo, setTeacherInfo] = useState({name: "", class: "", subject: ""})
+
+    useEffect(() => {
+        setTeacherInfo({name: state.name, class: state.class, subject: state.subject})
+        return () => {
+            setTeacherInfo({name: "", class: "", subject: ""})
+        }
+    }, [])
 
     const updateTeacher = () => {
 

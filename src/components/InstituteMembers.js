@@ -36,10 +36,10 @@ const InstituteMembers = ({auth}) => {
                 </nav>  
 
                 <div className="UniversityPageContainer">
-                    <button className="blue" style={{width: '47%'}} onClick={() => {navigate("/institute/members/teachers")}}>
+                    <button className="green" style={{width: '47%'}} onClick={() => {navigate("/institute/members/teachers")}}>
                         TEACHERS
                     </button>
-                    <button className="orange" style={{width: '47%'}} onClick={() => {navigate("/institute/members/students")}}>
+                    <button className="blue" style={{width: '47%'}} onClick={() => {navigate("/institute/members/students")}}>
                         STUDENTS
                     </button>
                 </div>

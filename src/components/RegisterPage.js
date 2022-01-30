@@ -23,7 +23,7 @@ const RegisterPage = ({auth}) => {
         console.log(StudentInfo)
 
         for (let x in StudentInfo){
-            if (TeacherInfo[x] == ""){
+            if (StudentInfo[x] === ""){
                 alert("Fill all the details")
                 return
             }
@@ -35,7 +35,7 @@ const RegisterPage = ({auth}) => {
                 pass: StudentInfo.password,
                 inst_name: auth.get.institute,
                 clas: StudentInfo.class,
-                section: StudentInfo.subject
+                section: StudentInfo.section
             })
             .then((res) => {
                 console.log(res.data.msg)
@@ -80,6 +80,14 @@ const RegisterPage = ({auth}) => {
 
     return (
         <div className="RegisterPageContainer">
+            <form className="green" onSubmit={registerTeacher}>
+                <label className="formHeader">REGISTER TEACHER</label>
+                <input type="text" placeholder="name" value={TeacherInfo.name} onChange={(e) => {setTeacherInfo({...TeacherInfo, name: e.target.value})}}/>
+                <input type="text" placeholder="Class" value={TeacherInfo.class} onChange={(e) => {setTeacherInfo({...TeacherInfo, class: e.target.value})}}/>
+                <input type="text" placeholder="Subject" value={TeacherInfo.subject} onChange={(e) => {setTeacherInfo({...TeacherInfo, subject: e.target.value})}}/>
+                <input type="text" placeholder="Password" value={TeacherInfo.password} onChange={(e) => {setTeacherInfo({...TeacherInfo, password: e.target.value})}}/>
+                <button type="submit">Register</button>
+            </form>
             <form className="blue" onSubmit={registerStudent}>
                 <label className="formHeader">REGISTER STUDENT</label>
                 <input type="text" placeholder="Name" value={StudentInfo.name} onChange={(e) => {setStudentInfo({...StudentInfo, name: e.target.value})}}/>
@@ -87,14 +95,6 @@ const RegisterPage = ({auth}) => {
                 <input type="text" placeholder="Section" value={StudentInfo.section} onChange={(e) => {setStudentInfo({...StudentInfo, section: e.target.value})}}/>
                 <input type="text" placeholder="Roll No" value={StudentInfo.rollno} onChange={(e) => {setStudentInfo({...StudentInfo, rollno: e.target.value})}}/>
                 <input type="text" placeholder="Password" value={StudentInfo.password} onChange={(e) => {setStudentInfo({...StudentInfo, password: e.target.value})}}/>
-                <button type="submit">Register</button>
-            </form>
-            <form className="green" onSubmit={registerTeacher}>
-            <label className="formHeader">REGISTER TEACHER</label>
-                <input type="text" placeholder="name" value={TeacherInfo.name} onChange={(e) => {setTeacherInfo({...TeacherInfo, name: e.target.value})}}/>
-                <input type="text" placeholder="Class" value={TeacherInfo.class} onChange={(e) => {setTeacherInfo({...TeacherInfo, class: e.target.value})}}/>
-                <input type="text" placeholder="Subject" value={TeacherInfo.subject} onChange={(e) => {setTeacherInfo({...TeacherInfo, subject: e.target.value})}}/>
-                <input type="text" placeholder="Password" value={TeacherInfo.password} onChange={(e) => {setTeacherInfo({...TeacherInfo, password: e.target.value})}}/>
                 <button type="submit">Register</button>
             </form>
         </div>
