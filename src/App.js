@@ -11,7 +11,6 @@ import TeacherTest from "./components/TeacherTest";
 import StudentTest from "./components/StudentTest";
 import StudentResource from "./components/StudentResource";
 import ResourceAccessPage from "./components/ResourceAccessPage";
-import io from 'socket.io-client'
 import InstituteMembers from "./components/InstituteMembers";
 import InstituteTeacherList from "./components/InstituteTeacherList";
 import InstituteStudentList from "./components/InstituteStudentList";

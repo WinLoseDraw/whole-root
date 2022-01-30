@@ -13,12 +13,10 @@ function useOutsideClickAlerter(refs) {
         let flag = false;
 
         refs.forEach(ref => {
-          if (!ref){
-            return;
-          }
-  
-          if (ref.current.contains(e.target)){
-            flag = true
+          if (ref!== null){
+            if (ref.current.contains(e.target)){
+              flag = true
+            } 
           }
         });
 
@@ -117,11 +115,15 @@ const StudentTest = () => {
     setPrevMousePos({x: e.clientX, y: e.clientY})
   }
 
+  const testSubmit = e => {
+    e.preventDefault();
+  }
+
   useEffect(() => {
     
     let t = []
     Questions.forEach((question, index) => {
-      t.push(<Question number={index+1} question={question.text}/>)
+      t.push(<Question number={index+1} question={question.text} _ref={answerText}/>)
     });
     setQuestionComponents(t);
 
@@ -150,13 +152,13 @@ const StudentTest = () => {
         
         <h1>PHYSICS ASSESSMENT</h1>
 
-        <form className="assessment">
+        <form className="assessment" onSubmit={testSubmit}>
           <div className="questionChangeBtnHolder">
             <button type="button" onClick={()=>{if (CurrentQuestionNumber > 1) setCurrentQuestionNumber(CurrentQuestionNumber - 1)}}>&larr;</button>
             <button type="button" onClick={()=>{if (CurrentQuestionNumber < QuestionComponents.length) setCurrentQuestionNumber(CurrentQuestionNumber + 1)}}>&rarr;</button>
           </div>
           {CurrentQuestionComponent}
-          <button type="submit" id="submitBtn">SUBMIT</button>
+          <button type="submit" id="submitBtn" ref={submitBtn}>SUBMIT</button>
         </form>
 
         {/* <div className="vhalf question">
@@ -189,14 +191,14 @@ const StudentTest = () => {
   )
 }
 
-const Question = ({number, question}) => {
+const Question = ({number, question, _ref}) => {
   return(
     <>
     Q{number}.
     <div className="question">
       {question}
     </div>
-    <div className="answer">
+    <div className="answer" ref={_ref}>
       <label htmlFor="answerText">Answer</label>
       <textarea name="answerText"  placeholder="Answer text here!!" rows="20" cols="110"></textarea>
     </div>
