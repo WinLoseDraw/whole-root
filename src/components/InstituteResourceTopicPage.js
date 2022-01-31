@@ -70,7 +70,7 @@ const AddForm = ({setOnAdd}) => {
     return(
         <div className="addFormContainer" >
             <div className="addForm" onSubmit={onSubmit} style={{justifyContent:'center'}}>
-                <label>Title</label>
+                <label>Topic</label>
                 <input type="name" value={FormDetails.name} onChange={e=>{setFormDetails({...FormDetails, name: e.target.value})}} style={{marginBottom:'20px'}}/>
                 <button type="submit">Submit</button>
                 <button type="button" onClick={()=>setOnAdd(false)}>Back</button>

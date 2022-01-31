@@ -37,7 +37,7 @@ const ResourceCard = ({name, resources}) => {
 
 
     const resourceClick = () => {
-        navigate("/Student/Resource/Access", {state: {name: name, resources: resources}});
+        navigate("/Student/Resource/topic", {state: {name: name, resources: resources}});
     }
 
     return (

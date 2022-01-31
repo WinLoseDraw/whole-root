@@ -22,6 +22,9 @@ import InstituteTeacherUpdatePage from "./components/InstituteTeacherUpdatePage"
 import InstituteStudentUpdatePage from "./components/InstituteStudentUpdatePage";
 import TeacherSettingsPaid from "./components/TeacherSettingsPaid";
 import InstituteResourceTopicPage from "./components/InstituteResourceTopicPage";
+import StudentResourceTopicPage from "./components/StudentResourceTopicPage";
+import TeacherResourceTopicPage from "./components/TeacherResourceTopicPage";
+import TeacherResourceAccessPage from "./TeacherResourceAccessPage";
 
 // Events
 
@@ -72,10 +75,13 @@ function App() {
           <Route path="/Student" element={<StudentPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Test" element={<StudentTest auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Resource" element={<StudentResource auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Student/Resource/topic" element={<StudentResourceTopicPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Resource/Access" element={<ResourceAccessPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher" element={<TeacherPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Settings" element={<TeacherSettingsPaid auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Resource" element={<TeacherResource auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Teacher/Resource/topic" element={<TeacherResourceTopicPage auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Teacher/Resource/access" element={<TeacherResourceAccessPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Test" element={<TeacherTest auth={{get: Auth, set: setAuth}} />} />
           <Route path="/free" element={<InstituteFreePage auth={{get: Auth, set: setAuth}} />} />       
         </Routes>

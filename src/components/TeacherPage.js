@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 const TeacherPage = ({auth}) => {
     let navigate = useNavigate()
 
+    const [IsBtnTextShowing, setIsBtnTextShowing] = useState(false)
+
     useEffect(() => {
         if (!auth.get.login) {
             navigate("/")
@@ -41,7 +43,7 @@ const TeacherPage = ({auth}) => {
                 </div>
             </nav>  
 
-            <div className="freeButtonsContainer">
+            {/* <div className="freeButtonsContainer">
                 <button className="freeBtn" style={{backgroundColor:'rgb(0, 119, 22)', color:'white'}} onClick={()=>navigate("/teacher/classroom")}>
                     CLASS
                 </button>
@@ -49,9 +51,9 @@ const TeacherPage = ({auth}) => {
                     SETTINGS
                 </button>
             </div>
-            <span style={{margin:'auto'}}><h1>CODE: </h1></span>
+            <span style={{margin:'auto'}}><h1>CODE: </h1></span> */}
 
-            {/* <div className="container">
+            <div className="container">
                 <button className="main-btn green"
                     onClick={() => navigate('/Teacher/classroom')}
                     onMouseOver={() => setIsBtnTextShowing({...IsBtnTextShowing, class: true})}
@@ -120,7 +122,7 @@ const TeacherPage = ({auth}) => {
                     </CSSTransition>
 
                 </button>
-            </div> */}
+            </div>
         </div>
     )
 }
