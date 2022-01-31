@@ -21,6 +21,7 @@ import InstituteFreePage from "./components/InstituteFreePage";
 import InstituteTeacherUpdatePage from "./components/InstituteTeacherUpdatePage";
 import InstituteStudentUpdatePage from "./components/InstituteStudentUpdatePage";
 import TeacherSettingsPaid from "./components/TeacherSettingsPaid";
+import InstituteResourceTopicPage from "./components/InstituteResourceTopicPage";
 
 // Events
 
@@ -65,6 +66,7 @@ function App() {
           <Route path="/institute/members/students/update" element={<InstituteStudentUpdatePage auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/Register" element={<RegisterPage auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/Resource" element={<InstituteResource auth={{get: Auth, set: setAuth}} />}/>
+          <Route path="/institute/Resource/topic" element={<InstituteResourceTopicPage auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/Resource/access" element={<InstituteResourceAccessPage auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/Student" element={<StudentPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Test" element={<StudentTest auth={{get: Auth, set: setAuth}} />} />

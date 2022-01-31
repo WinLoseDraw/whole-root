@@ -50,7 +50,7 @@ const ClassroomPage = ({user}) => {
             window.onscroll = function(){}
         }
 
-        disableScroll()
+        //disableScroll()
 
         return () => {
             enableScroll()
@@ -60,8 +60,6 @@ const ClassroomPage = ({user}) => {
     return (
         <>
         <div className="containerClassroomPage">
-
-           
 
             <div className="containerHeader">
                 <div className="header">
@@ -93,6 +91,9 @@ const ChatBox = ({}) => {
 
     const [CurrentMessage, setCurrentMessage] = useState("")
 
+    const [Messages, setMessages] = useState([{type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'recieved', content: "hi"}, {type: 'recieved', content: "how are you"}, {type: 'sent', content: "I am god"}, {type: 'recieved', content: "do you mean I am good ?"}, {type: 'sent', content: "No"}])
+    const [MessageComponents, setMessageComponents] = useState([])
+
 
     // Drag chat
     const [ChatPos, setChatPos] = useState({x: 100, y: 100})
@@ -119,6 +120,14 @@ const ChatBox = ({}) => {
         setPrevMousePos({x: e.clientX, y: e.clientY})
     }
 
+    useEffect(() => {
+        let t = []
+        Messages.forEach(element => {
+            t.push(<div className="messageHolder"><div className={element.type === 'sent' ? 'sentMessage': 'recievedMessage'}>{element.content}</div></div>)
+        });
+       setMessageComponents(t)
+    }, [Messages])
+
     return(
         <div className="containerChatBox"
             onMouseDown={chatMouseDown}
@@ -126,6 +135,7 @@ const ChatBox = ({}) => {
             onMouseUp={() => setChatDrag(false)}
             onMouseLeave={() => setChatDrag(false)}
             style={{left: ChatPos.x, top: ChatPos.y}}>
+            <div className="messageBox" >{MessageComponents}</div>
             <div className="inputContainer">
                 <input type="text" placeholder="Hey.." value={CurrentMessage} onChange={(e)=>setCurrentMessage(e.target.value)}/>
                 <button >&#9658;</button>

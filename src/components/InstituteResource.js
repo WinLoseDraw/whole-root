@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 
 const InstituteResource = () => {
     
+    // TODO: check the need of recources section of the state
     const [Resources, setResources] = useState([
         {name: "MATHS", resources: [{placeHolder: "Integeration", link: "/"}, {placeHolder: "Differentation", link: "/"}, {placeHolder: "ODE", link: "/"}]},
         {name: "PHYSICS", resources: [{placeHolder: "Kinematics", link: "/"}, {placeHolder: "Dynamics", link: "/"}, {placeHolder: "Rotation", link: "/"}]},
@@ -33,7 +34,7 @@ const ResourceCard = ({name, resources}) => {
 
 
     const resourceClick = () => {
-        navigate("/institute/Resource/Access", {state: {name: name, resources: resources}});
+        navigate("/institute/Resource/topic", {state: {name: name}});
     }
 
     return (

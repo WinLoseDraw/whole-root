@@ -7,7 +7,7 @@
     --sideBarHidePercentage: -65%;
     --rightBarHidePercentage: 65%;
     --toolBarColor: rgb(53, 129,82);
-    --chatBoxSize: 200px
+    --chatBoxSize: 280px
 }
 
 .containerClassroomPage{
@@ -47,6 +47,8 @@
     width: var(--chatBoxSize);
     height: calc(1.5 * var(--chatBoxSize));
 
+    overflow: hidden;
+
     background-color: rgb(197, 255, 197);
     border: 2px solid rgb(0, 107, 0);
 
@@ -60,6 +62,39 @@
 
     left: 100px;
     top: 100px;
+}
+
+.messageBox{
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: scroll;
+}
+
+.messageHolder{
+    display: flex;
+    flex-direction: column;
+}
+
+.recievedMessage{
+    background-color: white;
+    padding: 4px;
+    margin: 2px;
+    border-radius: 8px;
+    max-width: 60%;
+    box-shadow: rgba(68, 68, 68, 0.25) 0px 0px 4px 2px;
+}
+
+.sentMessage{
+    background-color: green;
+    color: white;
+    padding: 4px;
+    margin: 2px;
+    border-radius: 8px;
+    max-width: 60%;
+    box-shadow: rgba(68, 68, 68, 0.25) 0px 0px 4px 2px;
+    align-self: flex-end;
 }
 
 .inputContainer{
