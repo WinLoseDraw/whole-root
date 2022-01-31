@@ -145,10 +145,10 @@
     justify-content: space-evenly;
 }
 
-.ToolPadBackground:not(:hover){
+/* .ToolPadBackground:not(:hover){
     transform: translate(0, var(--toolBarHidePercentage));
     transition: transform 300ms;
-}
+} */
 
 .ToolPadBackground:hover{
     transform: translate(0, 0);
@@ -237,10 +237,10 @@
     flex-direction: column;
 }
 
-.sidePadBackground:not(:hover){
+/* .sidePadBackground:not(:hover){
     transform: translate(var(--sideBarHidePercentage), 0);
     transition: transform 300ms;
-}
+} */
 
 .sidePadBackground:hover{
     transform: translate(0, 0);
@@ -273,10 +273,10 @@
     font-size: var(--rightPadWidth);
 }
 
-.rightPadBackground:not(:hover){
+/* .rightPadBackground:not(:hover){
     transform: translate(var(--rightBarHidePercentage), 0);
     transition: transform 300ms;
-}
+} */
 
 .rightPadBackground:hover{
     transform: translate(0, 0);

@@ -229,8 +229,9 @@ const RightPad = ({user}) => {
                 <VolumeIcon color="#FFFFFF" onClick={()=>setIsVolumeOn(false)}/>:
                 <VolumeOffIcon color="#FFFFFF" onClick={()=>setIsVolumeOn(true)}/>}
             <CallIcon color="#FF0000" onClick={() => navigate(user==="teacher"?"/Teacher": "/Student/Class")}/>
-            <button className="routButton" style={{backgroundColor:'rgb(251, 138, 0)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Resource": "/Student/Resource")}></button>
-            <button className="routButton" style={{backgroundColor:'rgb(0, 92, 231)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Test": "/Student/Test")}></button>
+            {user !== "teacher" && <button className="routButton" style={{backgroundColor:'rgb(251, 138, 0)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Resource": "/Student/Resource")}></button>}
+            
+            {user !== "teacher" && <button className="routButton" style={{backgroundColor:'rgb(0, 92, 231)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Test": "/Student/Test")}></button>}
         </div>
     )
 }
