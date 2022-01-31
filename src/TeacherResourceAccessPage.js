@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
-import './CSS/ResourceAdd.css'
 
-const InstituteResourceAccessPage = () => {
+const TeacherResourceAccessPage = () => {
     const {state} = useLocation()
 
     const [Lectures, setLectures] = useState([{title: "First Order Linear", link: ""},{title: "First Order Non Linear", link: ""},{title: "Second Order Linear Homogeneous", link: ""},{title: "Operator Method", link: ""}])
@@ -118,5 +117,4 @@ const AddForm = ({setOnAdd}) => {
         </div>
     )
 }
-
-export default InstituteResourceAccessPage
+export default TeacherResourceAccessPage

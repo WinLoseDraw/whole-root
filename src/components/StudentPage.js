@@ -25,7 +25,7 @@ const StudentPage = ({auth}) => {
     return (
         <div className="mainpage">
 
-            <nav className="mainPageNav">
+            <nav className="mainPageNav" >
 
                 <div className="buttonHolder" style={{justifyContent:"flex-start"}}>
                     

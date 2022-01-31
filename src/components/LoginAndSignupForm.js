@@ -91,7 +91,12 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
         })
         .then((res) => {
             alert("Successfully signed up")
-            navigate("/institute")
+            auth.set({login: true, institute: SignUpDetails.university, loginType: 'institute', plan: plan})
+            if (plan == 'free'){
+                navigate("/free")
+            }else{
+                navigate("/institute")
+            }
         })
         .catch((err) => {
             console.log(err)
@@ -113,7 +118,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                 unmountOnExit
                 onExited={() => {setLoginCredentials({email: "", password: ""})}}>
 
-                <form action="login" className="main-form" onSubmit={onLoginSubmit}>
+                <form action="login" className="main-form">
                     
                     <label>LOG IN</label>
 

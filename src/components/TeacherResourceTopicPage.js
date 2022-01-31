@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router'
-
-const TeacherResource = () => {
-   // TODO: check the need of recources section of the state
-   const [Resources, setResources] = useState([
-        {name: "MATHS", resources: [{placeHolder: "Integeration", link: "/"}, {placeHolder: "Differentation", link: "/"}, {placeHolder: "ODE", link: "/"}]},
-        {name: "PHYSICS", resources: [{placeHolder: "Kinematics", link: "/"}, {placeHolder: "Dynamics", link: "/"}, {placeHolder: "Rotation", link: "/"}]},
-        {name: "CHEMISTRY", resources: [{placeHolder: "Physical", link: "/"}, {placeHolder: "Organic", link: "/"}, {placeHolder: "Inorganic", link: "/"}]},
-        {name: "ENGLISH", resources: [{placeHolder: "Litrature", link: "/"}, {placeHolder: "Grammer", link: "/"}]}
+const TeacherResourceTopicPage = () => {
+    const [Subjects, setSubjects] = useState([
+        {name: "ODE"},
+        {name: "PDE"},
+        {name: "CALCULUS"},
+        {name: "MATRIX"}
     ])
 
     const [OnAdd, setOnAdd] = useState(false)
@@ -16,11 +14,11 @@ const TeacherResource = () => {
 
     useEffect(() => {
         let t = []
-        Resources.forEach(item => {
-            t.push(<ResourceCard name={item.name} resources={Resources.resources}/>)
+        Subjects.forEach(item => {
+            t.push(<SubjectCard name={item.name} subjects={Subjects.subjects}/>)
         })
         setGridItems(t)
-    }, [Resources])
+    }, [Subjects])
 
     return (
         <>
@@ -33,17 +31,17 @@ const TeacherResource = () => {
     )
 }
 
-const ResourceCard = ({name, resources}) => {  
- 
+const SubjectCard = ({name}) => {  
+     
     let navigate = useNavigate()
 
 
-    const resourceClick = () => {
-        navigate("/teacher/Resource/topic", {state: {name: name}});
+    const subjectClick = () => {
+        navigate("/institute/resource/Access", {state: {name: name}});
     }
 
     return (
-        <div className="resourceCard" onClick={resourceClick}>
+        <div className="resourceCard" onClick={subjectClick}>
             <div>
                 {name}
             <div style={{width:"80%", height:"0px", margin:"10px auto", border:"1px solid black"}}></div>
@@ -71,7 +69,7 @@ const AddForm = ({setOnAdd}) => {
     return(
         <div className="addFormContainer" >
             <div className="addForm" onSubmit={onSubmit} style={{justifyContent:'center'}}>
-                <label>Subject</label>
+                <label>Topic</label>
                 <input type="name" value={FormDetails.name} onChange={e=>{setFormDetails({...FormDetails, name: e.target.value})}} style={{marginBottom:'20px'}}/>
                 <button type="submit">Submit</button>
                 <button type="button" onClick={()=>setOnAdd(false)}>Back</button>
@@ -79,5 +77,4 @@ const AddForm = ({setOnAdd}) => {
         </div>
     )
 }
-
-export default TeacherResource
+export default TeacherResourceTopicPage

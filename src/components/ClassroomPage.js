@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 
 import 'tippy.js/dist/tippy.css'
 
-const ClassroomPage = ({user, room, socket}) => {
+const ClassroomPage = ({user}) => {
 
     // Hooks
     const [OnSelectDraw, setOnSelectDraw] = useState({
@@ -50,22 +50,16 @@ const ClassroomPage = ({user, room, socket}) => {
             window.onscroll = function(){}
         }
 
-        disableScroll()
+        //disableScroll()
 
         return () => {
             enableScroll()
         }
     })
 
-    useEffect(() => {
-        socket.emit("join_room", room)
-    }, [room])
-
     return (
         <>
         <div className="containerClassroomPage">
-
-           
 
             <div className="containerHeader">
                 <div className="header">
@@ -87,33 +81,19 @@ const ClassroomPage = ({user, room, socket}) => {
          
             <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon}/>
             
-            {Chat && <ChatBox socket={socket} room={room} />}
+            {Chat && <ChatBox />}
         </div>
         </>
     )
 }
 
-const ChatBox = ({socket, room}) => {
+const ChatBox = ({}) => {
 
     const [CurrentMessage, setCurrentMessage] = useState("")
 
-    const sendMessage = async () => {
-        if (CurrentMessage === ""){return;}
+    const [Messages, setMessages] = useState([{type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'sent', content: "hello"}, {type: 'recieved', content: "hi"}, {type: 'recieved', content: "how are you"}, {type: 'sent', content: "I am god"}, {type: 'recieved', content: "do you mean I am good ?"}, {type: 'sent', content: "No"}])
+    const [MessageComponents, setMessageComponents] = useState([])
 
-        const messageData = {
-            room: room,
-            message: CurrentMessage,
-            author: socket.id
-        }
-
-        await socket.emit("send_message", messageData)
-    }
-
-    useEffect(() => {
-        socket.on("recieve_message", (data => {
-            console.log(data)
-        }))
-    }, [socket])
 
     // Drag chat
     const [ChatPos, setChatPos] = useState({x: 100, y: 100})
@@ -140,6 +120,14 @@ const ChatBox = ({socket, room}) => {
         setPrevMousePos({x: e.clientX, y: e.clientY})
     }
 
+    useEffect(() => {
+        let t = []
+        Messages.forEach(element => {
+            t.push(<div className="messageHolder"><div className={element.type === 'sent' ? 'sentMessage': 'recievedMessage'}>{element.content}</div></div>)
+        });
+       setMessageComponents(t)
+    }, [Messages])
+
     return(
         <div className="containerChatBox"
             onMouseDown={chatMouseDown}
@@ -147,9 +135,10 @@ const ChatBox = ({socket, room}) => {
             onMouseUp={() => setChatDrag(false)}
             onMouseLeave={() => setChatDrag(false)}
             style={{left: ChatPos.x, top: ChatPos.y}}>
+            <div className="messageBox" >{MessageComponents}</div>
             <div className="inputContainer">
                 <input type="text" placeholder="Hey.." value={CurrentMessage} onChange={(e)=>setCurrentMessage(e.target.value)}/>
-                <button onClick={sendMessage}>&#9658;</button>
+                <button >&#9658;</button>
             </div>
         </div>
     )
@@ -240,8 +229,9 @@ const RightPad = ({user}) => {
                 <VolumeIcon color="#FFFFFF" onClick={()=>setIsVolumeOn(false)}/>:
                 <VolumeOffIcon color="#FFFFFF" onClick={()=>setIsVolumeOn(true)}/>}
             <CallIcon color="#FF0000" onClick={() => navigate(user==="teacher"?"/Teacher": "/Student/Class")}/>
-            <button className="routButton" style={{backgroundColor:'rgb(251, 138, 0)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Resource": "/Student/Resource")}></button>
-            <button className="routButton" style={{backgroundColor:'rgb(0, 92, 231)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Test": "/Student/Test")}></button>
+            {user !== "teacher" && <button className="routButton" style={{backgroundColor:'rgb(251, 138, 0)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Resource": "/Student/Resource")}></button>}
+            
+            {user !== "teacher" && <button className="routButton" style={{backgroundColor:'rgb(0, 92, 231)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Test": "/Student/Test")}></button>}
         </div>
     )
 }

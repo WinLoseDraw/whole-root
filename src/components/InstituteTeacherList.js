@@ -11,12 +11,27 @@ const InstituteTeacherList = ({auth}) => {
     const [TableItems, setTableItems] = useState([])
     const [TableData, setTableData] = useState([])
 
+    const [UpdateClick, setUpdateClick] = useState(false)
+    const [UpdateIndex, setUpdateIndex] = useState(-1)
+
+    useEffect(() => {
+        setUpdateClick(false)
+        setUpdateIndex(-1)
+    }, [])
+
+    useEffect(() => {
+        if (UpdateClick){
+            navigate("/institute/members/teachers/update", {state: TableData[UpdateIndex]})
+        }
+    }, [UpdateClick])
+
     const onDelete = (index) => {
         console.log(TableData[index])
     }
 
     const onUpdate = (index) => {
-        navigate("/institute/members/teachers/update", {state: TableData[index]})
+        setUpdateIndex(index)
+        setUpdateClick(true)
     }
 
     useEffect(() => {
@@ -65,12 +80,12 @@ const InstituteTeacherList = ({auth}) => {
 const Row = ({sno, name, subject, _class, onDelete, onUpdate, index}) => {
     return(
         <div style={{display: 'flex'}}>
-            <div style={{ width:'5%', border: '1px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
+            <div style={{ width:'4%', border: '1px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
             <div style={{ width:'10%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{name}</div>
-            <div style={{ width:'37%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{_class}</div>
-            <div style={{ width:'38%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{subject}</div>
+            <div style={{ width:'39%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{_class}</div>
+            <div style={{ width:'39%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{subject}</div>
             <div style={{ width:'4%', border: '1px solid black', backgroundColor: 'white', padding:'8px', display:'flex', justifyContent:'center'}}><button onClick={(e)=>{onDelete(index)}}>X</button></div>
-            <div style={{ width:'6%', border: '1px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px', display:'flex', justifyContent:'center'}}><button onClick={(e)=>{onUpdate(index)}}>&uarr;</button></div>
+            <div style={{ width:'4%', border: '1px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px', display:'flex', justifyContent:'center'}}><button onClick={(e)=>{onUpdate(index)}}>&uarr;</button></div>
         </div>
     )
 }
@@ -78,12 +93,12 @@ const Row = ({sno, name, subject, _class, onDelete, onUpdate, index}) => {
 const End = ({sno, name, subject, _class, onDelete, onUpdate, index}) => {
     return(
         <div style={{display: 'flex'}}>
-            <div style={{ width:'5%', border: '1px solid black', borderLeft:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
+            <div style={{ width:'4%', border: '1px solid black', borderLeft:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
             <div style={{ width:'10%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{name}</div>
-            <div style={{ width:'37%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{_class}</div>
-            <div style={{ width:'38%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{subject}</div>
+            <div style={{ width:'39%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{_class}</div>
+            <div style={{ width:'39%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{subject}</div>
             <div style={{ width:'4%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px', display:'flex', justifyContent:'center'}}><button onClick={(e)=>{onDelete(index)}}>X</button></div>
-            <div style={{ width:'6%', border: '1px solid black', borderRight:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px', display:'flex', justifyContent:'center'}}><button onClick={(e)=>{onUpdate(index)}}>&uarr;</button></div>
+            <div style={{ width:'4%', border: '1px solid black', borderRight:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px', display:'flex', justifyContent:'center'}}><button onClick={(e)=>{onUpdate(index)}}>&uarr;</button></div>
         </div>
     )
 }
@@ -91,12 +106,12 @@ const End = ({sno, name, subject, _class, onDelete, onUpdate, index}) => {
 const Head = () => {
     return(
         <div style={{display: 'flex'}}>
-            <div style={{ width:'5%', border: '1px solid black', borderTop:'2px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>sno</div>
+            <div style={{ width:'4%', border: '1px solid black', borderTop:'2px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>sno</div>
             <div style={{ width:'10%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Name</div>
-            <div style={{ width:'37%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Class</div>
-            <div style={{ width:'38%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Subject</div>
-            <div style={{ width:'4%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px', fontSize:'0.8em'}}>Del</div>
-            <div style={{ width:'6%', border: '1px solid black', borderTop:'2px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px', fontSize:'0.7em'}}>Update</div>
+            <div style={{ width:'39%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Class</div>
+            <div style={{ width:'39%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Subject</div>
+            <div style={{ width:'4%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px', fontSize:'0.8em'}}>Delete</div>
+            <div style={{ width:'4%', border: '1px solid black', borderTop:'2px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px', fontSize:'0.7em'}}>Update</div>
         </div>
     )
 }

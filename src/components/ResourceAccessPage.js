@@ -6,19 +6,18 @@ const ResourceAccessPage = ({resources}) => {
 
     const {state} = useLocation()
 
-    const [Lectures, setLectures] = useState([{title: "ODE", link: ""},{title: "PDE", link: ""},{title: "Double Integral", link: ""},{title: "Triple Integral", link: ""}])
+    const [Lectures, setLectures] = useState([{title: "First Order Linear", link: ""},{title: "First Order Non Linear", link: ""},{title: "Second Order Linear Homogeneous", link: ""},{title: "Operator Method", link: ""}])
 
     const [LectureItems, setLectureItems] = useState([]);
-
 
 
     useEffect(() => {
         let t = []
         Lectures.forEach((element, index) => {
             if (index == Lectures.length - 1){
-                t.push(<End sno={index+1} name={element.title} link=" " notes=" " question=" "/>)
+                t.push(<End sno={index+1} title={element.title} link=" " notes=" " question="1" index={index}/>)
             }else{
-                t.push(<Row sno={index+1} name={element.title} link=" " notes=" " question=" "/>)
+                t.push(<Row sno={index+1} title={element.title} link=" " notes=" " question="1" index={index}/>)
             }
         });
         setLectureItems(t)
@@ -28,35 +27,37 @@ const ResourceAccessPage = ({resources}) => {
         <div style={{display: 'flex', flexDirection: 'column', backgroundColor: 'rgb(255, 205, 111)', minHeight:'100vh'}}>
             <div className="resourceAccessContainer">
                 <h1>{state.name}</h1>
-                <ul>
+                <div>
                     <Head />
                     {LectureItems}
-                </ul>
+                </div>
             </div>
         </div>
     )
 }
 
-const Row = ({sno, name, link, notes, question}) => {
+const Row = ({sno, title, date, notes, video, assignment, index}) => {
     return(
         <div style={{display: 'flex'}}>
-            <div style={{ width:'10%', border: '1px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
-            <div style={{ width:'40%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{name}</div>
-            <div style={{ width:'16%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{link}</div>
-            <div style={{ width:'17%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{notes}</div>
-            <div style={{ width:'17%', border: '1px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{question}</div>
+            <div style={{ width:'5%', border: '1px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
+            <div style={{ width:'48%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{title}</div>
+            <div style={{ width:'8%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{date}</div>
+            <div style={{ width:'13%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{video}</div>
+            <div style={{ width:'13%', border: '1px solid black', backgroundColor: 'white', padding:'8px'}}>{notes}</div>
+            <div style={{ width:'13%', border: '1px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{assignment}</div>
         </div>
     )
 }
 
-const End = ({sno, name, link, notes, question}) => {
+const End = ({sno, title, date, notes, video, assignment, onDelete, onUpdate, index}) => {
     return(
         <div style={{display: 'flex'}}>
-            <div style={{ width:'10%', border: '1px solid black', borderLeft:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
-            <div style={{ width:'40%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{name}</div>
-            <div style={{ width:'16%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{link}</div>
-            <div style={{ width:'17%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{notes}</div>
-            <div style={{ width:'17%', border: '1px solid black', borderRight:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{question}</div>
+            <div style={{ width:'5%', border: '1px solid black', borderLeft:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{sno}</div>
+            <div style={{ width:'48%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{title}</div>
+            <div style={{ width:'8%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{date}</div>
+            <div style={{ width:'13%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{video}</div>
+            <div style={{ width:'13%', border: '1px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{notes}</div>
+            <div style={{ width:'13%', border: '1px solid black', borderRight:'2px solid black', borderBottom:'2px solid black', backgroundColor: 'white', padding:'8px'}}>{assignment}</div>
         </div>
     )
 }
@@ -65,11 +66,12 @@ const End = ({sno, name, link, notes, question}) => {
 const Head = () => {
     return(
         <div style={{display: 'flex'}}>
-            <div style={{ width:'10%', border: '1px solid black', borderTop:'2px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Sno</div>
-            <div style={{ width:'40%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Name</div>
-            <div style={{ width:'16%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Link</div>
-            <div style={{ width:'17%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Notes</div>
-            <div style={{ width:'17%', border: '1px solid black', borderTop:'2px solid black', borderRight:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Ques</div>
+            <div style={{ width:'5%', border: '1px solid black', borderTop:'2px solid black', borderLeft:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Sno</div>
+            <div style={{ width:'48%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Title</div>
+            <div style={{ width:'8%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Date</div>
+            <div style={{ width:'13%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Video</div>
+            <div style={{ width:'13%', border: '1px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Notes</div>
+            <div style={{ width:'13%', border: '1px solid black', borderRight:'2px solid black', borderTop:'2px solid black', backgroundColor: 'white', padding:'8px'}}>Assignments</div>
         </div>
     )
 }
