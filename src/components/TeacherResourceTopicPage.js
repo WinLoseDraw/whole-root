@@ -37,7 +37,7 @@ const SubjectCard = ({name}) => {
 
 
     const subjectClick = () => {
-        navigate("/institute/resource/Access", {state: {name: name}});
+        navigate("/teacher/resource/Access", {state: {name: name}});
     }
 
     return (

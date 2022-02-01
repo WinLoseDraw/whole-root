@@ -24,8 +24,9 @@ import TeacherSettingsPaid from "./components/TeacherSettingsPaid";
 import InstituteResourceTopicPage from "./components/InstituteResourceTopicPage";
 import StudentResourceTopicPage from "./components/StudentResourceTopicPage";
 import TeacherResourceTopicPage from "./components/TeacherResourceTopicPage";
-import TeacherResourceAccessPage from "./TeacherResourceAccessPage";
+import TeacherResourceAccessPage from "./components/TeacherResourceAccessPage";
 import TeacherResourceMaterialChose from "./components/TeacherMaterialAssignmentChose";
+import TeacherAssignmentPage from "./components/TeacherAssignmentPage";
 
 // Events
 
@@ -84,6 +85,7 @@ function App() {
           <Route path="/Teacher/Resource/topic" element={<TeacherResourceTopicPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Resource/access" element={<TeacherResourceAccessPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teachers/ResourceAsignmentChoose" element={<TeacherResourceMaterialChose auth={{get: Auth, set: setAuth}} />} />
+          <Route path="/Teacher/Assignment" element={<TeacherAssignmentPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Test" element={<TeacherTest auth={{get: Auth, set: setAuth}} />} />
           <Route path="/free" element={<InstituteFreePage auth={{get: Auth, set: setAuth}} />} />       
         </Routes>
