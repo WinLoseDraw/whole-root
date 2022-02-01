@@ -25,6 +25,7 @@ import InstituteResourceTopicPage from "./components/InstituteResourceTopicPage"
 import StudentResourceTopicPage from "./components/StudentResourceTopicPage";
 import TeacherResourceTopicPage from "./components/TeacherResourceTopicPage";
 import TeacherResourceAccessPage from "./TeacherResourceAccessPage";
+import StudentResourceAssignmentChosePage from "./components/StudentResourceAssignmentChosePage";
 
 // Events
 
@@ -75,6 +76,7 @@ function App() {
           <Route path="/Student" element={<StudentPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Test" element={<StudentTest auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Resource" element={<StudentResource auth={{get: Auth, set: setAuth}} />} />
+          {/* <Route path="/Student/ResourceAsignmentChoose" element={<StudentResourceAssignmentChosePage auth={{get: Auth, set: setAuth}} />} /> */}
           <Route path="/Student/Resource/topic" element={<StudentResourceTopicPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Student/Resource/Access" element={<ResourceAccessPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher" element={<TeacherPage auth={{get: Auth, set: setAuth}} />} />
