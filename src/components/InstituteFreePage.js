@@ -1,5 +1,5 @@
-import React from 'react'
-import { useNavigate } from 'react-router'
+import React, {useState} from 'react'
+import { useLocation, useNavigate } from 'react-router'
 import WholerootLogoIcon from "../iconComponents/WholerootLogoIcon";
 import WholerootTextIcon from "../iconComponents/WholerootTextIcon";
 
@@ -7,8 +7,31 @@ import './CSS/InstituteFree.css'
 
 const InstituteFreePage = ({auth}) => {
 
+
     let navigate = useNavigate()
 
+    const [Uid, setUid] = useState('')
+
+    const uuid = () => {
+        var S4 = () => {
+          return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        return (
+          S4() +
+          S4() +
+          "-" +
+          S4() +
+          "-" +
+          S4() +
+          "-" +
+          S4() +
+          "-" +
+          S4() +
+          S4() +
+          S4()
+        );
+      };
+    
     return (
         <div className="freeContainer">
             <nav className="mainPageNav">
@@ -31,14 +54,14 @@ const InstituteFreePage = ({auth}) => {
             </nav>  
 
             <div className="freeButtonsContainer">
-                <button className="freeBtn" style={{backgroundColor:'rgb(0, 119, 22)', color:'white'}} onClick={navigate('/free/Classroom')}>
+                <button className="freeBtn" style={{backgroundColor:'rgb(0, 119, 22)', color:'white'}} onClick={()=>navigate('/free/Teacher/Classroom', {state: {uid: Uid}})}>
                     CLASS
                 </button>
-                <button className="freeBtn" style={{backgroundColor:'rgb(0, 92, 231)', color:'white'}}>
-                    SETTINGS
+                <button className="freeBtn" style={{backgroundColor:'rgb(0, 92, 231)', color:'white'}} onClick={()=>setUid(uuid())}>
+                    GENERATE CODE
                 </button>
             </div>
-            <span style={{margin:'auto'}}><h1>CODE: </h1></span>
+            <span style={{margin:'20px auto'}}><h1>CODE: {Uid} </h1></span>
         </div>
     )
 }

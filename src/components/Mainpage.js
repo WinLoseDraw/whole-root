@@ -73,7 +73,10 @@ const Mainpage = ({events, auth}) => {
                     <button className="navButtonLogin" onClick={() => setIsOnSubscription(false)}>Back</button>
                     </div>: 
                         <div className="buttonHolder" style={{justifyContent:"flex-start"}}>   
-                            <button className="navButtonSignup" onClick={()=>{setOnQuickJoin(true); setOnLogin(false); setIsOnMainPage(false)}}>
+                            {/* <button className="navButtonSignup" onClick={()=>{setOnQuickJoin(true); setOnLogin(false); setIsOnMainPage(false)}}>
+                                QUICK JOIN
+                            </button>     */}
+                            <button className="navButtonSignup" onClick={()=>{setOnQuickJoin(true); setOnLogin(false); setIsOnMainPage(false); navigate('free/Student/Classroom')}}>
                                 QUICK JOIN
                             </button>    
                         </div>}
