@@ -88,9 +88,8 @@ function App() {
           <Route path="/Teacher/Assignment" element={<TeacherAssignmentPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Test" element={<TeacherTest auth={{get: Auth, set: setAuth}} />} />
           <Route path="/free" element={<InstituteFreePage auth={{get: Auth, set: setAuth}} />} />       
-          <Route path="free/Teacher/Classroom" element={<TestBoard userType="teacher" auth={{get: Auth, set: setAuth}}/>}/>
-          <Route path="free/Student/Classroom" element={<TestBoard userType="student" auth={{get: Auth, set: setAuth}}/>}/>
-          {/* <Route path="free/Classroom" element={<ClassroomPage user="teacher" room="classroom1" auth={{get: Auth, set: setAuth}}/>}/> */}
+          <Route path="free/Teacher/Classroom" element={<ClassroomPage user="teacher" auth={{get: Auth, set: setAuth}}/>}/>
+          <Route path="free/Student/Classroom" element={<ClassroomPage user="student" auth={{get: Auth, set: setAuth}}/>}/>
         </Routes>
       </Router>
     </div>

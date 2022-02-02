@@ -98,7 +98,7 @@ const JoinCreateRoom = ({ uuid, setUser, setRoomJoined }) => {
             </div>
           </form>
         </div>
-        {/* <div className="col-md-5 p-5 border mx-auto">
+        <div className="col-md-5 p-5 border mx-auto">
           <h1 className="text-center text-primary mb-5">Join Room</h1>
           <form onSubmit={handleJoinSubmit}>
             <div className="form-group my-2">
@@ -128,7 +128,7 @@ const JoinCreateRoom = ({ uuid, setUser, setRoomJoined }) => {
               </button>
             </div>
           </form>
-        </div> */}
+        </div>
       </div>
     </div>
   );

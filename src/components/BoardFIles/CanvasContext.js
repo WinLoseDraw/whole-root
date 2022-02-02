@@ -1,8 +1,15 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 
+import io, { Socket } from "socket.io-client";
+
+const socket = io.connect("https://wholeroot-whiteboard-server.herokuapp.com/")
+
 const CanvasContext = React.createContext();
 
 export const CanvasProvider = ({ children }) => {
+
+  const [User, setUser] = useState({roomId: '', user: ''})
+
   const [isDrawing, setIsDrawing] = useState(false)
   
   const [Color, setColor] = useState("green")
@@ -15,6 +22,25 @@ export const CanvasProvider = ({ children }) => {
   const contextRef = useRef(null);
 
   // Effect hook
+
+  useEffect(() => {
+    console.log(User)
+    if (User.roomId !== '' && User.user !== "")
+      socket.emit("join-room", User); 
+  }, [User])
+
+  useEffect(() => {
+    socket.on("recieve-canvas", data => {
+      console.log("data")
+      let image = new Image();
+      let canvas = canvasRef.current;
+      let ctx = canvas.getContext('2d')
+      image.onload = () => {
+        ctx.drawImage(image, 0, 0, canvas.width/2, canvas.height/2)
+      }
+      image.src = data
+    })
+  }, [socket])
 
   useEffect(() => {
 
@@ -50,6 +76,7 @@ export const CanvasProvider = ({ children }) => {
     }
 
     window.addEventListener("paste", pasteImage)
+
     return () => {
       window.removeEventListener("paste", pasteImage)
     }
@@ -104,6 +131,8 @@ export const CanvasProvider = ({ children }) => {
 
     contextRef.current.closePath();
     setIsDrawing(false);
+
+    socket.emit("send-canvas", { roomId: User.roomId, image: canvasRef.current.toDataURL("image/png")})
   };
 
   const drawPencil = (offsetX, offsetY) => {
@@ -162,6 +191,10 @@ export const CanvasProvider = ({ children }) => {
     setType(type)
   }
 
+  const _setUser = (roomId, user) => {
+    setUser({roomId: roomId, user: user})
+  }
+
   return (
     <CanvasContext.Provider
       value={{
@@ -173,7 +206,8 @@ export const CanvasProvider = ({ children }) => {
         clearCanvas,
         draw,
         changeColor,
-        changeType
+        changeType,
+        _setUser
       }}
     >
       {children}

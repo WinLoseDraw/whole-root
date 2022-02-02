@@ -5,8 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CanvasProvider } from "./components/BoardFIles/CanvasContext";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
+
 
 ReactDOM.render(
   <React.StrictMode>

@@ -8,6 +8,7 @@
 
 .resourceCard{
     width: 28vw;
+    height: 28vh;
 
     margin: 55px auto;
 
@@ -25,6 +26,7 @@
 
 .addCard{
     width: 28vw;
+    height: 28vh;
 
     margin: 55px auto;
     border-radius: 50%;
