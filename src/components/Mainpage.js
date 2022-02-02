@@ -76,7 +76,7 @@ const Mainpage = ({events, auth}) => {
                             {/* <button className="navButtonSignup" onClick={()=>{setOnQuickJoin(true); setOnLogin(false); setIsOnMainPage(false)}}>
                                 QUICK JOIN
                             </button>     */}
-                            <button className="navButtonSignup" onClick={()=>{setOnQuickJoin(true); setOnLogin(false); setIsOnMainPage(false); navigate('free/Student/Classroom')}}>
+                            <button className="navButtonSignup" onClick={()=>{setOnQuickJoin(true); setOnLogin(false); setIsOnMainPage(false);}}>
                                 QUICK JOIN
                             </button>    
                         </div>}

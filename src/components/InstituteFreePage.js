@@ -10,7 +10,7 @@ const InstituteFreePage = ({auth}) => {
 
     let navigate = useNavigate()
 
-    const [Uid, setUid] = useState('')
+    const [RoomId, setRoomId] = useState('')
 
     const uuid = () => {
         var S4 = () => {
@@ -54,14 +54,14 @@ const InstituteFreePage = ({auth}) => {
             </nav>  
 
             <div className="freeButtonsContainer">
-                <button className="freeBtn" style={{backgroundColor:'rgb(0, 119, 22)', color:'white'}} onClick={()=>navigate('/free/Teacher/Classroom', {state: {uid: Uid}})}>
+                <button className="freeBtn" style={{backgroundColor:'rgb(0, 119, 22)', color:'white'}} onClick={()=>navigate('/free/Teacher/Classroom', {state: {roomId: RoomId, user: "Test"}})}>
                     CLASS
                 </button>
-                <button className="freeBtn" style={{backgroundColor:'rgb(0, 92, 231)', color:'white'}} onClick={()=>setUid(uuid())}>
+                <button className="freeBtn" style={{backgroundColor:'rgb(0, 92, 231)', color:'white'}} onClick={()=>setRoomId(uuid())}>
                     GENERATE CODE
                 </button>
             </div>
-            <span style={{margin:'20px auto'}}><h1>CODE: {Uid} </h1></span>
+            <span style={{margin:'20px auto'}}><h1>CODE: {RoomId} </h1></span>
         </div>
     )
 }

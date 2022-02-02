@@ -20,11 +20,14 @@ import './CSS/ClassroomPage.css'
 import { useState, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { Canvas } from './BoardFIles/Canvas';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import 'tippy.js/dist/tippy.css'
 
 const ClassroomPage = ({user}) => {
+
+    const {state} = useLocation()
+    console.log(state)
 
     // Hooks
     const [OnSelectDraw, setOnSelectDraw] = useState({
@@ -64,7 +67,7 @@ const ClassroomPage = ({user}) => {
             <div className="containerHeader">
                 <div className="header">
                     <div className="heading">SUBJECT: MATHS</div>
-                    <div className="heading">TEACHER: </div>
+                    <div className="heading">TEACHER: {state.user}</div>
                 </div>
             </div>
 
@@ -79,7 +82,7 @@ const ClassroomPage = ({user}) => {
             </div>
 
          
-            <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon}/>
+            <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon} user={state}/>
             
             {Chat && <ChatBox />}
         </div>

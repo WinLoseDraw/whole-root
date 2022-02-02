@@ -1,13 +1,35 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
+import axios from 'axios'
 
-const InstituteResourceTopicPage = () => {
-    const [Subjects, setSubjects] = useState([
-        {name: "ODE"},
-        {name: "PDE"},
-        {name: "CALCULUS"},
-        {name: "MATRIX"}
-    ])
+const InstituteResourceTopicPage = ({auth}) => {
+
+    let {state} = useLocation()
+
+    const [Subjects, setSubjects] = useState([])
+
+    useEffect(() => {
+
+        console.log(state)
+
+        axios.post('https://test-serverrr.herokuapp.com/allchapters', {
+            subj_name: state.name,
+            inst_name: auth.get.institute
+        }).then((res) => {
+            console.log(res.data.rows)
+
+            let t = []
+            res.data.rows.forEach(element => {
+                console.log(element)
+                t.push({name: element[0]['value']})
+            });
+
+            setSubjects(t)
+
+        }).catch(err=>{
+            alert(err)
+        })
+    }, [])
 
     const [OnAdd, setOnAdd] = useState(false)
 
@@ -27,7 +49,7 @@ const InstituteResourceTopicPage = () => {
                 {GridItems}
                 <AddCard setOnAdd={setOnAdd}/>
             </div>
-            {OnAdd && <AddForm setOnAdd={setOnAdd}/>}
+            {OnAdd && <AddForm setOnAdd={setOnAdd} auth={auth} name={state.name}/>}
         </>
     )
 }
@@ -59,20 +81,31 @@ const AddCard = ({setOnAdd}) => {
     )
 }
 
-const AddForm = ({setOnAdd}) => {
+const AddForm = ({setOnAdd, auth, name}) => {
 
     const [FormDetails, setFormDetails] = useState({name: ''})
 
     const onSubmit = e => {
-        e.preventDefault()
+        console.log(name)
+        console.log(auth.get.institute)
+        axios.post('https://test-serverrr.herokuapp.com/makechapter', {
+            chap_name: name,
+            subj_name: FormDetails.name,
+            inst_name: auth.get.institute
+        }).then((res) => {
+            console.log(res.data)
+            alert('success')
+        }).catch(err=>{
+            alert(err)
+        })
     }
 
     return(
         <div className="addFormContainer" >
-            <div className="addForm" onSubmit={onSubmit} style={{justifyContent:'center'}}>
+            <div className="addForm" style={{justifyContent:'center'}}>
                 <label>Topic</label>
                 <input type="name" value={FormDetails.name} onChange={e=>{setFormDetails({...FormDetails, name: e.target.value})}} style={{marginBottom:'20px'}}/>
-                <button type="submit">Submit</button>
+                <button type="button" onClick={onSubmit}>Submit</button>
                 <button type="button" onClick={()=>setOnAdd(false)}>Back</button>
             </div>
         </div>

@@ -12,7 +12,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
     // Hooks
     const [LoginCredentials, setLoginCredentials] = useState({email: "", password: ""})
     const [SignUpDetails, setSignUpDetails] = useState({university: "", email: "", password: "", confPassword: ""})
-    const [QuickJoinDetails, setQuickJoinDetails] = useState({code: "", password: "", name: ""})
+    const [QuickJoinDetails, setQuickJoinDetails] = useState({code: "", name: ""})
 
     // Events
     const onLoginSubmit = (e, type) => { 
@@ -106,6 +106,8 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
     const onQuickJoinSubmit = e => {
         e.preventDefault()
 
+        navigate("/free/student/classroom", {state: {roomId: QuickJoinDetails.code, user: QuickJoinDetails.name}})
+
         console.log(QuickJoinDetails)
     }
 
@@ -192,10 +194,6 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                         <input type="text" placeholder="Code" 
                             value={QuickJoinDetails.code}
                             onChange={e => setQuickJoinDetails({...QuickJoinDetails, code: e.target.value})}/>
-                        
-                        <input type="password" placeholder="Password" 
-                            value={QuickJoinDetails.password}
-                            onChange={e => setQuickJoinDetails({...QuickJoinDetails, password: e.target.value})}/>
                         
                         <button type="submit">JOIN</button>
 
