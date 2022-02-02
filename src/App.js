@@ -27,6 +27,7 @@ import TeacherResourceTopicPage from "./components/TeacherResourceTopicPage";
 import TeacherResourceAccessPage from "./components/TeacherResourceAccessPage";
 import TeacherResourceMaterialChose from "./components/TeacherMaterialAssignmentChose";
 import TeacherAssignmentPage from "./components/TeacherAssignmentPage";
+import TestBoard from "./testWhiteBoard/TestBoard";
 
 // Events
 
@@ -63,7 +64,6 @@ function App() {
           <Route path="/Student/Class" element={<ClassPage auth={{get: Auth, set: setAuth}}/>}/>
           <Route path="Student/Classroom" element={<ClassroomPage user="student" room="classroom1" auth={{get: Auth, set: setAuth}}/>}/>
           <Route path="Teacher/Classroom" element={<ClassroomPage user="teacher" room="classroom1" auth={{get: Auth, set: setAuth}}/>}/>
-          <Route path="free/Classroom" element={<ClassroomPage user="teacher" room="classroom1" auth={{get: Auth, set: setAuth}}/>}/>
           <Route path="/institute" element={<UniversityPage auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/members" element={<InstituteMembers auth={{get: Auth, set: setAuth}} />}/>
           <Route path="/institute/members/teachers" element={<InstituteTeacherList auth={{get: Auth, set: setAuth}} />}/>
@@ -88,6 +88,9 @@ function App() {
           <Route path="/Teacher/Assignment" element={<TeacherAssignmentPage auth={{get: Auth, set: setAuth}} />} />
           <Route path="/Teacher/Test" element={<TeacherTest auth={{get: Auth, set: setAuth}} />} />
           <Route path="/free" element={<InstituteFreePage auth={{get: Auth, set: setAuth}} />} />       
+          <Route path="free/Teacher/Classroom" element={<TestBoard userType="teacher" auth={{get: Auth, set: setAuth}}/>}/>
+          <Route path="free/Student/Classroom" element={<TestBoard userType="student" auth={{get: Auth, set: setAuth}}/>}/>
+          {/* <Route path="free/Classroom" element={<ClassroomPage user="teacher" room="classroom1" auth={{get: Auth, set: setAuth}}/>}/> */}
         </Routes>
       </Router>
     </div>
