@@ -24,7 +24,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import 'tippy.js/dist/tippy.css'
 
-const ClassroomPage = ({user}) => {
+const ClassroomPage = ({user, socket}) => {
 
     const {state} = useLocation()
     console.log(state)
@@ -82,7 +82,7 @@ const ClassroomPage = ({user}) => {
             </div>
 
          
-            <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon} user={state}/>
+            <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon} user={state} socket={socket}/>
             
             {Chat && <ChatBox />}
         </div>

@@ -20,7 +20,7 @@ export function Canvas({color, type, user}) {
   }, []);
 
   useEffect(() => {
-    _setUser(user.roomId, user.user)
+    _setUser(user.roomId, user.user, user.isTeacher)
   }, [user])
 
   useEffect(() => {

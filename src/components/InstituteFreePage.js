@@ -54,7 +54,7 @@ const InstituteFreePage = ({auth}) => {
             </nav>  
 
             <div className="freeButtonsContainer">
-                <button className="freeBtn" style={{backgroundColor:'rgb(0, 119, 22)', color:'white'}} onClick={()=>navigate('/free/Teacher/Classroom', {state: {roomId: RoomId, user: "Test"}})}>
+                <button className="freeBtn" style={{backgroundColor:'rgb(0, 119, 22)', color:'white'}} onClick={()=>navigate('/free/Teacher/Classroom', {state: {roomId: RoomId, user: "Test", isTeacher: true}})}>
                     CLASS
                 </button>
                 <button className="freeBtn" style={{backgroundColor:'rgb(0, 92, 231)', color:'white'}} onClick={()=>setRoomId(uuid())}>

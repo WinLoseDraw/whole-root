@@ -2,13 +2,13 @@ import React, { useContext, useRef, useState, useEffect } from "react";
 
 import io, { Socket } from "socket.io-client";
 
-const socket = io.connect("https://wholeroot-whiteboard-server.herokuapp.com/")
+const socket = io.connect("http://localhost:5000")
 
 const CanvasContext = React.createContext();
 
 export const CanvasProvider = ({ children }) => {
 
-  const [User, setUser] = useState({roomId: '', user: ''})
+  const [User, setUser] = useState({roomId: '', user: '', isTeacher: false})
 
   const [isDrawing, setIsDrawing] = useState(false)
   
@@ -191,8 +191,8 @@ export const CanvasProvider = ({ children }) => {
     setType(type)
   }
 
-  const _setUser = (roomId, user) => {
-    setUser({roomId: roomId, user: user})
+  const _setUser = (roomId, user, isTeacher) => {
+    setUser({roomId: roomId, user: user, isTeacher})
   }
 
   return (

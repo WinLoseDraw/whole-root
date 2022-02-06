@@ -106,7 +106,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
     const onQuickJoinSubmit = e => {
         e.preventDefault()
 
-        navigate("/free/student/classroom", {state: {roomId: QuickJoinDetails.code, user: QuickJoinDetails.name}})
+        navigate("/free/student/classroom", {state: {roomId: QuickJoinDetails.code, user: QuickJoinDetails.name, isTeacher: false}})
 
         console.log(QuickJoinDetails)
     }
