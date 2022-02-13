@@ -127,8 +127,8 @@ const ClassroomPage = ({user, socket, auth}) => {
                 
                 {Chat && <ChatBox />}
             </div>
-            <div style={{position:'absolute', top:'0px', bottom:'0px', width:'10px', backgroundColor:'black', left:divPos}} onMouseDown={startSliding}></div>
-            <iframe src="" frameborder="0" style={{position: 'absolute', top:'0px', bottom: '0px', right: '0px', left:divPos}}></iframe>
+            <div style={{position:'absolute', top:'0px', bottom:'0px', width:'30px', backgroundColor:'black', left:divPos}} onMouseDown={startSliding}></div>
+            <iframe src={`https://wholeroot-video-conference.herokuapp.com/${state.roomId}`} allow="camera;microphone;display-capture;" frameborder="0" style={{position: 'absolute', bottom: '0px', left:(divPos + 30), height:'100vh', width: window.innerWidth - divPos}}></iframe>
         </div>
     )
 }

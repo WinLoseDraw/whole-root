@@ -33,7 +33,7 @@ import io from "socket.io-client";
 import TeacherTestAddPage from "./components/TeacherTestAddPage";
 import TeacherTestUpdatePage from "./components/TeacherTestUpdatePage";
 
-const socket = io.connect("http://localhost:5000")
+const socket = io.connect("https://wholeroot-whiteboard-server.herokuapp.com/")
 
 // Events
 
@@ -98,6 +98,7 @@ function App() {
           <Route path="/free" element={<InstituteFreePage auth={{get: Auth, set: setAuth}} socket={socket} />} />       
           <Route path="free/Teacher/Classroom" element={<ClassroomPage user="teacher" auth={{get: Auth, set: setAuth}} socket={socket}/>}/>
           <Route path="free/Student/Classroom" element={<ClassroomPage user="student" auth={{get: Auth, set: setAuth}} socket={socket}/>}/>
+          <Route path="/test" element={<h1>Hello</h1>} />
         </Routes>
       </Router>
     </div>
