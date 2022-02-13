@@ -88,13 +88,17 @@ const StudentTest = () => {
 
   const [CurrentQuestionNumber, setCurrentQuestionNumber] = useState(1)
 
+  const [TimeLeft,  setTimeLeft] = useState(0)
+
   // Refs
   const answerText = useRef(null)
   const submitBtn = useRef(null)
   const videoBox = useRef(null)
+  const changeQuestionRight = useRef(null)
+  const changeQuestionLeft = useRef(null)
 
   // Alerts
-  useOutsideClickAlerter([answerText, submitBtn, videoBox])
+  useOutsideClickAlerter([answerText, submitBtn, videoBox, changeQuestionRight, changeQuestionRight])
   useTabChangeAlerter()
 
   const dragVideo = (e) =>{
@@ -134,60 +138,39 @@ const StudentTest = () => {
   }, [QuestionComponents, CurrentQuestionNumber])
 
   return (
+    <>
+    {TimeLeft === 1? <TimeUp /> :
+    
     <div className="main">
-        <div id="video-conf" className="video-conference"
-        onMouseDown={videoMouseDown}
-        onMouseMove={(e) => dragVideo(e)}
-        onMouseUp={() => setVideoDrag(false)}
-        onMouseLeave={() => setVideoDrag(false)}
-        style={{left: VideoPos.x, top: VideoPos.y}}
-        ref={videoBox}>
-          <div className="video"></div>
-          <div className="btns">
-            <button className="sepBtn">Mute</button>
-            <button className="sepBtn">Video</button>
-            <button className="sepBtn">Leave</button>
-          </div>
+      <div id="video-conf" className="video-conference"
+      onMouseDown={videoMouseDown}
+      onMouseMove={(e) => dragVideo(e)}
+      onMouseUp={() => setVideoDrag(false)}
+      onMouseLeave={() => setVideoDrag(false)}
+      style={{left: VideoPos.x, top: VideoPos.y}}
+      ref={videoBox}>
+        <div className="video"></div>
+        <div className="btns">
+          <button className="sepBtn">Mute</button>
+          <button className="sepBtn">Video</button>
+          <button className="sepBtn">Leave</button>
         </div>
-        
-        <h1>PHYSICS ASSESSMENT</h1>
-
-        <form className="assessment" onSubmit={testSubmit}>
-          <div className="questionChangeBtnHolder">
-            <button type="button" onClick={()=>{if (CurrentQuestionNumber > 1) setCurrentQuestionNumber(CurrentQuestionNumber - 1)}}>&larr;</button>
-            <button type="button" onClick={()=>{if (CurrentQuestionNumber < QuestionComponents.length) setCurrentQuestionNumber(CurrentQuestionNumber + 1)}}>&rarr;</button>
-          </div>
-          {CurrentQuestionComponent}
-          <button type="submit" id="submitBtn" ref={submitBtn}>SUBMIT</button>
-        </form>
-
-        {/* <div className="vhalf question">
-          <div className="paperHeading">Physics Internal Assessment</div>
-
-          <div className="paperContent">
-
-            Rules
-            <ol>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ol>
-
-            <div className="divider"></div>
-            Questions 
-
-            <ol>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ol>
-          </div>
-        </div>
-        <div className="vhalf submission">
-          <textarea placeholder="Answer Here!!" id="answerText" className="answerText" ref={answerText}></textarea>
-          <button id="submitBtn" className="submitBtn" ref={submitBtn}>Submit</button>
-        </div> */}
       </div>
+      
+      <h1>PHYSICS ASSESSMENT</h1>
+
+      <form className="assessment" onSubmit={testSubmit}>
+        <div className="timer">TIME LEFT: 00:00:00</div>
+        <div className="questionChangeBtnHolder">
+          <button type="button" ref={changeQuestionLeft} onClick={()=>{if (CurrentQuestionNumber > 1) setCurrentQuestionNumber(CurrentQuestionNumber - 1)}}>&larr;</button>
+          <button type="button" ref={changeQuestionRight} onClick={()=>{if (CurrentQuestionNumber < QuestionComponents.length) setCurrentQuestionNumber(CurrentQuestionNumber + 1)}}>&rarr;</button>
+        </div>
+        {CurrentQuestionComponent}
+        <button type="submit" className="submitBtn" ref={submitBtn}>SUBMIT</button>
+      </form>
+    </div>
+    }
+    </>    
   )
 }
 
@@ -203,6 +186,16 @@ const Question = ({number, question, _ref}) => {
       <textarea name="answerText"  placeholder="Answer text here!!" rows="20" cols="110"></textarea>
     </div>
     </>
+  )
+}
+
+const TimeUp = () => {
+  return(
+    <div style={{width:'100vw', height:'100vh', display:'flex', alignItems:'center', justifyContent:'center'}}>
+      <div style={{width:'70%', height:'75%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'60px', fontWeight:'bold', backgroundColor:'white', boxShadow:'rgba(0, 0, 0, 0.5) 0px 2px 8px'}}>
+        TIME'S UP!!
+      </div>
+    </div>
   )
 }
 

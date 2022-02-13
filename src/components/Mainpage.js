@@ -12,7 +12,7 @@ import WholerootTextIcon from "../iconComponents/WholerootTextIcon";
 import { useNavigate } from "react-router-dom";
 import { getIsLogin, getLoginType } from "../App";
 
-const Mainpage = ({events, auth}) => {
+const Mainpage = ({events, auth, socket}) => {
 
     let navigate = useNavigate()
 
@@ -256,7 +256,9 @@ const Mainpage = ({events, auth}) => {
                             events={{
                                 checkLogin: events.checkLogin,
                                 getSignupDetails: events.getSignupDetails
-                            }}/>
+                            }}
+                            
+                            socket={socket}/>
                     </div>
 
                 </CSSTransition>
