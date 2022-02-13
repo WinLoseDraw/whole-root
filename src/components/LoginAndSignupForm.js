@@ -5,7 +5,7 @@ import { CSSTransition } from "react-transition-group";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 
-const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogin, onSignup, onQuickJoin, auth }) => {
+const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogin, onSignup, onQuickJoin, auth, socket }) => {
 
     let navigate = useNavigate()
 
@@ -106,7 +106,19 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
     const onQuickJoinSubmit = e => {
         e.preventDefault()
 
-        navigate("/free/student/classroom", {state: {roomId: QuickJoinDetails.code, user: QuickJoinDetails.name}})
+        if (QuickJoinDetails.code !== '' && QuickJoinDetails.name !== ""){
+            socket.emit("join-room", {roomId: QuickJoinDetails.code, user: QuickJoinDetails.name, isTeacher: false}); 
+            
+            socket.on("join-result", data=>{
+                console.log(data);
+                if (data.isJoined === true){
+                    navigate("/free/student/classroom", {state: {roomId: QuickJoinDetails.code, user: QuickJoinDetails.name, isTeacher: false}})
+                } else {
+                    alert('incorrect room')
+                }
+            })
+        }
+
 
         console.log(QuickJoinDetails)
     }
@@ -191,7 +203,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
                             value={QuickJoinDetails.name}
                             onChange={e => setQuickJoinDetails({...QuickJoinDetails, name: e.target.value})}/>
 
-                        <input type="text" placeholder="Code" 
+                        <input type="text" placeholder="Room" 
                             value={QuickJoinDetails.code}
                             onChange={e => setQuickJoinDetails({...QuickJoinDetails, code: e.target.value})}/>
                         

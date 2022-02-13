@@ -1,14 +1,17 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 
-import io, { Socket } from "socket.io-client";
+// import io, { Socket } from "socket.io-client";
 
-const socket = io.connect("https://wholeroot-whiteboard-server.herokuapp.com/")
+// const socket = io.connect("http://localhost:5000")
 
 const CanvasContext = React.createContext();
 
 export const CanvasProvider = ({ children }) => {
 
-  const [User, setUser] = useState({roomId: '', user: ''})
+  const [socket, setSocket] = useState(null)
+  
+
+  const [User, setUser] = useState({roomId: '', user: '', isTeacher: false})
 
   const [isDrawing, setIsDrawing] = useState(false)
   
@@ -23,23 +26,25 @@ export const CanvasProvider = ({ children }) => {
 
   // Effect hook
 
-  useEffect(() => {
-    console.log(User)
-    if (User.roomId !== '' && User.user !== "")
-      socket.emit("join-room", User); 
-  }, [User])
+  // useEffect(() => {
+  //   console.log(User)
+  //   if (User.roomId !== '' && User.user !== "")
+  //     socket.emit("join-room", User); 
+  // }, [User])
 
   useEffect(() => {
-    socket.on("recieve-canvas", data => {
-      console.log("data")
-      let image = new Image();
-      let canvas = canvasRef.current;
-      let ctx = canvas.getContext('2d')
-      image.onload = () => {
-        ctx.drawImage(image, 0, 0, canvas.width/2, canvas.height/2)
-      }
-      image.src = data
-    })
+    if (socket !== null){
+      socket.on("recieve-canvas", data => {
+        console.log("data")
+        let image = new Image();
+        let canvas = canvasRef.current;
+        let ctx = canvas.getContext('2d')
+        image.onload = () => {
+          ctx.drawImage(image, 0, 0, canvas.width/2, canvas.height/2)
+        }
+        image.src = data
+      })
+    }
   }, [socket])
 
   useEffect(() => {
@@ -191,8 +196,12 @@ export const CanvasProvider = ({ children }) => {
     setType(type)
   }
 
-  const _setUser = (roomId, user) => {
-    setUser({roomId: roomId, user: user})
+  const _setUser = (roomId, user, isTeacher) => {
+    setUser({roomId: roomId, user: user, isTeacher})
+  }
+
+  const _setSocket =  (socket) =>{
+    setSocket(socket)
   }
 
   return (
@@ -207,7 +216,8 @@ export const CanvasProvider = ({ children }) => {
         draw,
         changeColor,
         changeType,
-        _setUser
+        _setUser,
+        _setSocket
       }}
     >
       {children}

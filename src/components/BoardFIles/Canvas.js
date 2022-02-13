@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useCanvas } from "./CanvasContext";
 
-export function Canvas({color, type, user}) {
+export function Canvas({color, type, user, socket}) {
   const {
     canvasRef,
     prepareCanvas,
@@ -10,17 +10,19 @@ export function Canvas({color, type, user}) {
     draw,
     changeColor,
     changeType,
-    _setUser
+    _setUser,
+    _setSocket
   } = useCanvas();
 
   useEffect(() => {
+    _setSocket(socket)
     prepareCanvas();
     console.log(user)
     
   }, []);
 
   useEffect(() => {
-    _setUser(user.roomId, user.user)
+    _setUser(user.roomId, user.user, user.isTeacher)
   }, [user])
 
   useEffect(() => {

@@ -23,8 +23,11 @@ import { Canvas } from './BoardFIles/Canvas';
 import { useLocation, useNavigate } from "react-router-dom";
 
 import 'tippy.js/dist/tippy.css'
+import { useCanvas } from './BoardFIles/CanvasContext';
 
-const ClassroomPage = ({user}) => {
+const ClassroomPage = ({user, socket, auth}) => {
+
+    let navigate = useNavigate()
 
     const {state} = useLocation()
     console.log(state)
@@ -37,6 +40,8 @@ const ClassroomPage = ({user}) => {
 
     const [Chat, setChat] = useState(false)
 
+    const [divPos, setDivPos] = useState(500)
+    const [isSliding, setIsSliding] = useState(false)
     // Effect hook
 
     useEffect(() => {
@@ -53,40 +58,78 @@ const ClassroomPage = ({user}) => {
             window.onscroll = function(){}
         }
 
-        //disableScroll()
+        disableScroll()
 
         return () => {
             enableScroll()
         }
     })
 
+    const leaveCall = () => {
+        socket.emit("leave-room", {roomId: state.roomId});
+
+        socket.on("leave-result", data=>{
+            if (data){
+                if (auth.get.loginType == 'free'){
+                    if (user == 'teacher'){
+                        navigate('/free')
+                    }
+                }
+            }
+        })
+    }
+
+    const startSliding = (e) => {
+        setIsSliding(true)
+    } 
+
+    const slide = e => {
+        if (isSliding === true){
+            let pos;
+            if (e.clientX < 300){
+                pos = 300;
+            }else if (e.clientX > window.innerWidth - 100){
+                pos = window.innerWidth - 100
+            }else{
+                pos = e.clientX
+            }
+            setDivPos(pos)
+        }
+    }
+
+    const stopSliding = e => {
+        setIsSliding(false)
+    }
+
     return (
-        <>
-        <div className="containerClassroomPage">
+        <div style={{width: '100vw', height: '100vh'}} onMouseMove={slide} onMouseUp={stopSliding} onMouseLeave={stopSliding}>
+            <div className="containerClassroomPage" style={{position: 'absolute', left:'0px', top:'0px', width: divPos}}>
 
-            <div className="containerHeader">
-                <div className="header">
-                    <div className="heading">SUBJECT: MATHS</div>
-                    <div className="heading">TEACHER: {state.user}</div>
+                <div className="containerHeader">
+                    <div className="header">
+                        <div className="heading">SUBJECT: MATHS</div>
+                        <div className="heading">TEACHER: {state.user}</div>
+                    </div>
                 </div>
-            </div>
 
-            <div className="containerSidePad">
-                <SidePad setChat={setChat}/>
-            </div>
-            <div className="containerToolPad">
-                <ToolPad OnSelect={{get: OnSelectDraw, set: setOnSelectDraw}}/>
-            </div>
-            <div className="containerRightPad">
-                <RightPad user={user}/>
-            </div>
+                <div className="containerSidePad">
+                    <SidePad setChat={setChat}/>
+                </div>
+                <div className="containerToolPad">
+                    <ToolPad OnSelect={{get: OnSelectDraw, set: setOnSelectDraw}}/>
+                </div>
+                <div className="containerRightPad">
+                    <RightPad user={user} leaveCall={leaveCall}/>
+                </div>
 
-         
-            <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon} user={state}/>
             
-            {Chat && <ChatBox />}
+                <Canvas color={OnSelectDraw.color} type={OnSelectDraw.icon} user={state} socket={socket}/>
+                
+                {Chat && <ChatBox />}
+            </div>
+            <div style={{position:'absolute', top:'0px', bottom:'0px', width:'10px', backgroundColor:'black', left:divPos}} onMouseDown={startSliding}></div>
+            <iframe src="" frameborder="0" style={{position: 'absolute', top:'0px', bottom: '0px', right: '0px', left:divPos}}></iframe>
         </div>
-        </>
     )
 }
 
@@ -216,7 +259,7 @@ const SidePad = ({setChat}) => {
     )
 }
 
-const RightPad = ({user}) => {
+const RightPad = ({user, leaveCall}) => {
 
     let navigate = useNavigate();
 
@@ -231,7 +274,7 @@ const RightPad = ({user}) => {
             {IsVolumeOn?
                 <VolumeIcon color="#FFFFFF" onClick={()=>setIsVolumeOn(false)}/>:
                 <VolumeOffIcon color="#FFFFFF" onClick={()=>setIsVolumeOn(true)}/>}
-            <CallIcon color="#FF0000" onClick={() => navigate(user==="teacher"?"/Teacher": "/Student/Class")}/>
+            <CallIcon color="#FF0000" onClick={() => leaveCall()}/>
             {user !== "teacher" && <button className="routButton" style={{backgroundColor:'rgb(251, 138, 0)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Resource": "/Student/Resource")}></button>}
             
             {user !== "teacher" && <button className="routButton" style={{backgroundColor:'rgb(0, 92, 231)'}} onClick={() => navigate(user==="teacher"?"/Teacher/Test": "/Student/Test")}></button>}
