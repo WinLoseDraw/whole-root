@@ -34,12 +34,12 @@ const InstituteFreePage = ({auth, socket}) => {
         };
 
     const onClassClick = () => {
-        socket.emit("join-room", {roomId: RoomId, user: "Test", isTeacher: true}); 
+        socket.emit("join-room", {roomId: RoomId, user: auth.get.institute, isTeacher: true}); 
             
         socket.on("join-result", data=>{
             if (data.isJoined === true){
                 console.log(RoomId)
-                navigate('/free/Teacher/Classroom', {state: {roomId: RoomId, user: "Test", isTeacher: true}})
+                navigate('/free/Teacher/Classroom', {state: {roomId: RoomId, user: data.teacher, isTeacher: true}})
             } else {
                 alert('incorrect room')
             }
