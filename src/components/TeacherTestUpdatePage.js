@@ -11,6 +11,32 @@ const TeacherTestUpdatePage = () => {
 
     const [QuestionComponents, setQuestionComponents] = useState([]);
 
+    const [TestCode, setTestCode] = useState('')
+
+    const [divPos, setDivPos] = useState(500)
+    const [isSliding, setIsSliding] = useState(false)
+    const [pageWidth, setPageWidth] = useState(500)
+
+    const uuid = () => {
+        var S4 = () => {
+          return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        return (
+          S4() +
+          S4() +
+          "-" +
+          S4() +
+          "-" +
+          S4() +
+          "-" +
+          S4() +
+          "-" +
+          S4() +
+          S4() +
+          S4()
+        );
+      };
+
     const addQuestion = (question) => {
         setQuestions([...Questions, question])
         setQuestionsSize(QuestionsSize + 1)
@@ -28,6 +54,42 @@ const TeacherTestUpdatePage = () => {
         setQuestionsSize(QuestionsSize - 1)
     }
 
+    const onStart = () => {
+        setTestCode(uuid())
+    }
+
+    const startSliding = (e) => {
+        setIsSliding(true)
+    } 
+
+    const slide = e => {
+        if (isSliding === true){
+            let pos;
+            if (e.clientX < 300){
+                pos = 300;
+            }else if (e.clientX > window.innerWidth - 100){
+                pos = window.innerWidth - 100
+            }else{
+                pos = e.clientX
+            }
+            setDivPos(pos)
+        }
+    }
+
+    const stopSliding = e => {
+        setIsSliding(false)
+    }
+
+    useEffect(() => {
+        setPageWidth(window.innerWidth)
+    }, [divPos])
+
+    useEffect(() => {
+        setTestCode('')
+        setDivPos(window.innerWidth - 100)
+        setPageWidth(window.innerWidth)
+    }, [])
+
     useEffect(() => {
         let t = [];
         Questions.forEach((element, index) => {
@@ -44,24 +106,39 @@ const TeacherTestUpdatePage = () => {
     }, [Questions])
 
     return (
-        <div className="main">
-       
-            <h1>PHYSICS ASSESSMENT</h1>
+        <div onMouseMove={slide} onMouseUp={stopSliding} onMouseLeave={stopSliding}>
+            <div className="main"  style={{position:'absolute', left:'0px', top:'0px', bottom: '0px', width:divPos}}>
+        
+                <h1>PHYSICS ASSESSMENT</h1>
 
-            <form className="assessment" onSubmit={(e) => e.preventDefault()}>
-            
-                {QuestionComponents}
+                <form className="assessment" onSubmit={(e) => e.preventDefault()}>
+                
+                    {QuestionComponents}
 
-                <div className="question" style ={{marginBottom: '20px', display:'flex', justifyContent:'space-between', paddingTop:'15px', paddingBottom: '15px'}}>
-                    Duration
-                    <button style={{backgroundColor: 'black', color: 'white', border: 'none', padding:'4px 8px', borderRadius:'4px'}}>Change</button>
-                </div>
+                    <div className="question" style ={{marginBottom: '20px', display:'flex', justifyContent:'space-between', paddingTop:'15px', paddingBottom: '15px'}}>
+                        Duration
+                        <button style={{backgroundColor: 'black', color: 'white', border: 'none', padding:'4px 8px', borderRadius:'4px'}}>Change</button>
+                    </div>
 
-                <button type="button" className="submitBtn" onClick={() => {setOnAdd(true)}}>ADD</button>
-                <button type="button" className="submitBtn">UPDATE</button>
-            </form>
-            {OnAdd && <AddForm setOnAdd={setOnAdd} addQuestion={addQuestion} />}
-            {onDuration && <ChangeDurationForm setOnDuration={setOnDuration} duration={{get: Duration, set: setDuration}} />}
+                    <button type="button" className="submitBtn" onClick={() => {setOnAdd(true)}}>ADD</button>
+                    <button type="button" className="submitBtn">UPDATE</button>
+                    {TestCode !== '' && (
+                        <div className="question" style ={{marginBottom: '20px', display:'flex', justifyContent:'space-between'}}>
+                            Code:{TestCode}
+                        </div>
+                    )}
+                    <button type="button" className="submitBtn" onClick={() => {onStart()}}>START</button>
+                    
+                </form>
+                {OnAdd && <AddForm setOnAdd={setOnAdd} addQuestion={addQuestion} />}
+                {onDuration && <ChangeDurationForm setOnDuration={setOnDuration} duration={{get: Duration, set: setDuration}} />}
+            </div>
+            {TestCode !== '' && (
+                <>
+                    <div style={{position:'absolute', top:'0px', bottom:'0px', width:'30px', backgroundColor:'black', left:divPos}} onMouseDown={startSliding}></div>
+                    <iframe src={`https://wholeroot-video-conference.herokuapp.com/${TestCode}`} allow="camera;microphone;display-capture;" frameborder="0" style={{position: 'absolute', bottom: '0px', left:(divPos + 30), height:'100vh', width: window.innerWidth - divPos}}></iframe>
+                </>
+            )}
         </div>
     )
 }

@@ -112,7 +112,7 @@ const LoginAndSignupForm = ({ login, signup, enterMainPage, events, plan, onLogi
             socket.on("join-result", data=>{
                 console.log(data);
                 if (data.isJoined === true){
-                    navigate("/free/student/classroom", {state: {roomId: QuickJoinDetails.code, user: QuickJoinDetails.name, isTeacher: false}})
+                    navigate("/free/student/classroom", {state: {roomId: QuickJoinDetails.code, user: data.teacher, isTeacher: false}})
                 } else {
                     alert('incorrect room')
                 }

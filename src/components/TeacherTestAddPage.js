@@ -9,6 +9,8 @@ const TeacherTestAddPage = ({auth}) => {
     ])
 
     const [GridItems, setGridItems] = useState([])
+    const [OnAdd, setOnAdd] = useState(false)
+    
 
     useEffect(() => {
         let t = []
@@ -23,6 +25,8 @@ const TeacherTestAddPage = ({auth}) => {
     return (
         <div className="resourceContainer" style={{backgroundColor:"rgba(0,0,0,0)"}}>
             {GridItems}
+            <AddCard setOnAdd={setOnAdd} />
+            {OnAdd && <AddForm setOnAdd={setOnAdd}/>}
         </div>
     )
 }
@@ -45,5 +49,45 @@ const TestCard = ({name}) => {
         </div>
     )
 }
+
+const AddCard = ({setOnAdd}) => {
+    return(
+        <div className="addCard" onClick={()=>setOnAdd(true)}>
+            ADD
+        </div>
+    )
+}
+
+const AddForm = ({setOnAdd, auth, name}) => {
+
+    const [FormDetails, setFormDetails] = useState({name: ''})
+
+    const onSubmit = e => {
+        // console.log(name)
+        // console.log(auth.get.institute)
+        // axios.post('https://test-serverrr.herokuapp.com/makechapter', {
+        //     chap_name: name,
+        //     subj_name: FormDetails.name,
+        //     inst_name: auth.get.institute
+        // }).then((res) => {
+        //     console.log(res.data)
+        //     alert('success')
+        // }).catch(err=>{
+        //     alert(err)
+        // })
+    }
+
+    return(
+        <div className="addFormContainer" >
+            <div className="addForm" style={{justifyContent:'center'}}>
+                <label>Name</label>
+                <input type="name" value={FormDetails.name} onChange={e=>{setFormDetails({...FormDetails, name: e.target.value})}} style={{marginBottom:'20px'}}/>
+                <button type="button" onClick={onSubmit}>Submit</button>
+                <button type="button" onClick={()=>setOnAdd(false)}>Back</button>
+            </div>
+        </div>
+    )
+}
+
 
 export default TeacherTestAddPage

@@ -33,7 +33,8 @@ import io from "socket.io-client";
 import TeacherTestAddPage from "./components/TeacherTestAddPage";
 import TeacherTestUpdatePage from "./components/TeacherTestUpdatePage";
 
-const socket = io.connect("https://wholeroot-whiteboard-server.herokuapp.com/")
+// const socket = io.connect("https://wholeroot-whiteboard-server.herokuapp.com/")
+const socket = io.connect("http://localhost:5000/")
 
 // Events
 
